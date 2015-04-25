@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/layout/main_layout.xhtml">
+	<ui:define name="content">
+		<f:event listener="#{productSearchManagedBean.search}" type="preRenderView"></f:event>
+			<h6><h:outputText value="#{messages['productSearch.youSearchedFor']} #{productSearchManagedBean.searchText}" /></h6>
+
+			<h:panelGrid columns="4" style="border: transparent;">
+				<ui:repeat var="product" value="#{productSearchManagedBean.products}">
+					<p:panel id="productPanel" >
+						<a href="produto?prodId=#{product.id}" title="#{product.name}" class="url">
+							<p:graphicImage name="#{mainManagedBean.staticPath}#{product.mainImage}" height="225" width="225" />
+						</a>
+						<a href="produto?prodId=#{product.id}" title="#{product.name}" class="url">
+							<h:outputText value="#{product.name}"/>
+						</a>
+						<a href="produto?prodId=#{product.id}" title="#{product.name}" class="url">
+							<f:view>
+								<f:subview id="specialPrice" rendered="#{product.specialPrice != null and product.specialPrice > 0}">
+									<h:outputText value="#{messages['product.price.from']} #{product.price}"/>
+									<h:outputText value="#{messages['product.price.to']} #{product.specialPrice}"/>
+								</f:subview>
+								<f:subview id="normalPrice"
+									rendered="#{product.specialPrice == null or product.specialPrice le 0}">
+									<h:outputText value="#{product.specialPrice}"/>
+								</f:subview>
+							</f:view>
+						</a>
+					</p:panel>
+				</ui:repeat>
+			</h:panelGrid>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,36 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>br.unicamp.ic.lsd.mercurius</groupId>
+    <artifactId>connectors</artifactId>
+    <version>1.3</version>
+  </parent>
+
+  <artifactId>view-customer-connector</artifactId>
+
+  <name>View Customer Connector</name>
+
+  <dependencies>
+		<dependency>
+			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+			<artifactId>datatype</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+			<artifactId>customer-mgr-spec</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+			<artifactId>customer-mgr-impl</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+			<artifactId>view-spec</artifactId>
+			<optional>true</optional>
+		</dependency>
+	</dependencies>
+</project>

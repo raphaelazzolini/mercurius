@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/layout/main_layout.xhtml">
+	<ui:define name="content">
+		<f:event listener="#{orderManagedBean.createOrder}" type="preRenderView"></f:event>
+
+		<p:panel id="identificationPanel" header="#{messages['order.title']}">
+			<p:panelGrid columns="2" style="border: transparent;">
+				<p:outputLabel value="{messages['order.productsTotal']}"/>
+				<h:outputText value="(#{orderManagedBean.numberOfItems}): #{orderManagedBean.productsTotal}"/>
+
+				<p:outputLabel value="{messages['order.subtotal']}"/>
+				<h:outputText value="#{orderManagedBean.subTotal}"/>
+
+				<p:outputLabel value="{messages['order.total']}"/>
+				<h:outputText value="#{orderManagedBean.total}"/>
+			</p:panelGrid>
+
+			<h3><h:outputText value="#{messages['order.address']}"/></h3>
+
+			<h:outputText value="#{orderManagedBean.address.name}"/>
+			<h:outputText value="#{orderManagedBean.address.streetAddress1}"/>
+			<h:outputText value="#{orderManagedBean.address.city}, #{orderManagedBean.address.state} - #{orderManagedBean.address.postCode}"/>
+			<h:outputText value="#{orderManagedBean.address.telephoneNumber}"/>
+			<h:outputText value="#{orderManagedBean.address.emailAddress}"/>
+
+			<p:panelGrid columns="2">
+				<h:outputText value="Entrega Convencional"/>
+				<h:outputText value="21 dias uteis"/>
+
+				<h:outputText value="#{messages['order.shipping']}: "/>
+				<h:outputText value="#{orderManagedBean.shippingTotal}"/>
+			</p:panelGrid>
+
+			<p:panelGrid columns="2">
+				<h3><h:outputText value="#{messages['order.creditCard']}"/></h3>
+				<h:outputText value=""/>
+
+				<p:outputLabel value="#{messages['order.name']}"/>
+				<p:inputText value="#{orderManagedBean.creditCardInformation.nome}"/>
+
+				<p:outputLabel value="#{messages['order.number']}"/>
+				<p:inputText value="#{orderManagedBean.creditCardInformation.numeroCartao}"/>
+
+				<p:outputLabel value="#{messages['order.cardValidMonth']}"/>
+				<p:panel>
+					<p:selectOneMenu value="#{orderManagedBean.creditCardInformation.validadeMes}">
+						<f:selectItem itemLabel="Mês" itemValue="" />
+						<f:selectItem itemLabel="01" itemValue="01" />
+						<f:selectItem itemLabel="02" itemValue="02" />
+						<f:selectItem itemLabel="03" itemValue="03" />
+						<f:selectItem itemLabel="04" itemValue="04" />
+						<f:selectItem itemLabel="05" itemValue="05" />
+						<f:selectItem itemLabel="06" itemValue="06" />
+						<f:selectItem itemLabel="07" itemValue="07" />
+						<f:selectItem itemLabel="08" itemValue="08" />
+						<f:selectItem itemLabel="09" itemValue="09" />
+						<f:selectItem itemLabel="10" itemValue="10" />
+						<f:selectItem itemLabel="11" itemValue="11" />
+						<f:selectItem itemLabel="12" itemValue="12" />
+					</p:selectOneMenu>
+					<p:selectOneMenu value="#{orderManagedBean.creditCardInformation.validadeAno}">
+						<f:selectItem itemLabel="Ano" itemValue="" />
+						<f:selectItem itemLabel="2014" itemValue="2014" />
+						<f:selectItem itemLabel="2015" itemValue="2015" />
+						<f:selectItem itemLabel="2016" itemValue="2016" />
+						<f:selectItem itemLabel="2017" itemValue="2017" />
+						<f:selectItem itemLabel="2018" itemValue="2018" />
+						<f:selectItem itemLabel="2019" itemValue="2019" />
+						<f:selectItem itemLabel="2020" itemValue="2020" />
+						<f:selectItem itemLabel="2021" itemValue="2021" />
+						<f:selectItem itemLabel="2022" itemValue="2022" />
+						<f:selectItem itemLabel="2023" itemValue="2023" />
+						<f:selectItem itemLabel="2024" itemValue="2024" />
+					</p:selectOneMenu>
+				</p:panel>
+
+				<p:outputLabel value="#{messages['order.securityCode']}"/>
+				<p:inputText value="#{orderManagedBean.creditCardInformation.codigoSeguranca}"/>
+			</p:panelGrid>
+
+			<p:commandButton action="#{orderManagedBean.finalizarPedido}" value="#{messages['order.confirm']}" styleClass="fa fa-check" />
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

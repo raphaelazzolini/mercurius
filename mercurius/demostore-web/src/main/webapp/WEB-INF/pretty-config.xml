@@ -1,0 +1,46 @@
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+
+	<url-mapping id="index">
+		<pattern value="/index" />
+		<view-id value="/index.xhtml" />
+	</url-mapping>
+
+	<url-mapping id="login">
+		<pattern value="/login" />
+		<view-id value="/login.xhtml" />
+	</url-mapping>
+
+	<url-mapping id="cadastro">
+		<pattern value="/cadastro" />
+		<view-id value="/cadastro.xhtml" />
+	</url-mapping>
+
+	<url-mapping id="busca">
+		<pattern value="/busca" />
+		<view-id value="/busca.xhtml" />
+	</url-mapping>
+
+	<url-mapping id="produto">
+		<pattern value="/produto" />
+		<view-id value="/produto.xhtml" />
+	</url-mapping>
+
+	<url-mapping id="carrinho">
+		<pattern value="/carrinho" />
+		<view-id value="/carrinho.xhtml" />
+	</url-mapping>
+
+	<url-mapping id="checkout">
+		<pattern value="/checkout" />
+		<view-id value="/checkout.xhtml" />
+	</url-mapping>
+
+	<url-mapping id="confirmacao_pedido">
+		<pattern value="/confirmacao_pedido" />
+		<view-id value="/confirmacao_pedido.xhtml" />
+	</url-mapping>
+
+</pretty-config>

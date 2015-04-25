@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/layout/main_layout.xhtml">
+	<ui:define name="content">
+		<p:panel id="identificationPanel" header="#{messages['register.title']}">
+			<h6><h:outputText value="#{messages['register.description']}" /></h6>
+
+			<h:panelGrid columns="4">
+				<p:outputLabel for="nome" value="#{messages['register.name']}"/>
+				<p:inputText id="nome" value="#{cadastroManagedBean.customer.firstName}" maxlength="25" required="true"/>
+
+				<p:outputLabel for="sobrenome" value="#{messages['register.lastname']}"/>
+				<p:inputText id="sobrenome" value="#{cadastroManagedBean.customer.lastName}" maxlength="45" required="true"/>
+
+				<p:outputLabel for="email" value="#{messages['register.email']}"/>
+				<p:inputText id="email" value="#{cadastroManagedBean.customer.emailAddress}" maxlength="50" required="true"/>
+
+				<p:outputLabel for="cpf" value="#{messages['register.document']}"/>
+				<p:inputText id="cpf" value="#{cadastroManagedBean.customer.document}" maxlength="11" required="true"/>
+
+				<p:outputLabel for="data_nascimento" value="#{messages['register.birthdate']}"/>
+				<p:calendar id="data_nascimento" value="#{cadastroManagedBean.customer.birthDate}" pattern="dd/MM/yyyy"
+					maxdate="01/01/2010" mindate="01/01/1900" navigator="true" required="true" />
+
+				<p:outputLabel for="sexo" value="#{messages['register.gender']}"/>
+				<p:selectOneRadio id="sexo" value="#{cadastroManagedBean.customer.gender}" required="true">
+					<f:selectItem itemLabel="#{messages['register.male']}" itemValue="m" />
+					<f:selectItem itemLabel="#{messages['register.female']}" itemValue="f" />
+				</p:selectOneRadio>
+
+				<p:outputLabel for="telefone" value="#{messages['register.phone']}"/>
+				<p:inputMask id="telefone" value="#{cadastroManagedBean.customer.telephoneNumber}" mask="(99) 9999-9999?9" required="true" />
+
+				<p:outputLabel for="celular" value="#{messages['register.mobilephone']}"/>
+				<p:inputMask id="celular" value="#{cadastroManagedBean.customer.mobilePhoneNumber}" mask="(99) 9999-9999?9" />
+
+				<p:outputLabel for="senha" value="#{messages['register.password']}"/>
+				<p:password id="senha" value="#{cadastroManagedBean.password}" feedback="true" match="confirma_senha" required="true"/>
+
+				<p:outputLabel for="confirma_senha" value="#{messages['register.confirmPassword']}"/>
+				<p:password id="confirma_senha" value="#{cadastroManagedBean.passwordConfirm}" feedback="false" required="true"/>
+
+				<p:outputLabel for="cep" value="#{messages['register.postCode']}" />
+				<p:inputMask id="cep" value="#{cadastroManagedBean.address.postCode}" mask="99999-999" required="true" />
+
+				<p:outputLabel for="tipo_endereco" value="#{messages['register.addressType']}"/>
+				<p:selectOneMenu id="tipo_endereco" value="#{cadastroManagedBean.address.addressName}" style="width:209px" required="true" >
+					<f:selectItem itemLabel="#{messages['select']}" itemValue="" />
+					<f:selectItem id="apartamento" itemLabel="#{messages['register.addressType.apartament']}" itemValue="#{messages['register.addressType.apartament']}" />
+					<f:selectItem id="casa" itemLabel="#{messages['register.addressType.house']}" itemValue="#{messages['register.addressType.house']}" />
+					<f:selectItem id="comercial" itemLabel="#{messages['register.addressType.commercial']}" itemValue="#{messages['register.addressType.commercial']}" />
+					<f:selectItem id="outro" itemLabel="#{messages['register.addressType.other']}" itemValue="#{messages['register.addressType.other']}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel for="endereco" value="#{messages['register.address']}"/>
+				<p:inputText id="endereco" value="#{cadastroManagedBean.address.streetAddress1}" maxlength="65" required="true"/>
+
+				<p:outputLabel for="numero" value="#{messages['register.addressNumber']}"/>
+				<p:inputText id="numero" value="#{cadastroManagedBean.numeroEndereco}" maxlength="6" required="true"/>
+
+				<p:outputLabel for="complemento" value="#{messages['register.address2']}"/>
+				<p:inputText id="complemento" value="#{cadastroManagedBean.address.streetAddress2}" maxlength="35" required="false"/>
+
+				<p:outputLabel for="bairro" value="#{messages['register.suburb']}"/>
+				<p:inputText id="bairro" value="#{cadastroManagedBean.address.suburb}" maxlength="45" required="true"/>
+
+				<p:outputLabel for="cidade" value="#{messages['register.city']}"/>
+				<p:inputText id="cidade" value="#{cadastroManagedBean.address.city}" maxlength="80" required="true"/>
+
+				<p:outputLabel for="state" value="#{messages['register.state']}"/>
+				<p:inputText id="state" value="#{cadastroManagedBean.address.state}" maxlength="2" required="true"/>
+			</h:panelGrid>
+
+			<h:panelGrid columns="2">
+				<p:commandLink value="#{messages['back']}" action="#{customerManagedBean.loginPage}" immediate="true" />
+				<p:commandButton value="#{messages['register.register']}" action="#{cadastroManagedBean.cadastrar}"/>
+			</h:panelGrid>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

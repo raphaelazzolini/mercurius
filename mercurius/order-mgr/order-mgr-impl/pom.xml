@@ -1,0 +1,98 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+	<artifactId>order-mgr-impl</artifactId>
+
+	<name>Order Manager Implementation</name>
+
+	<parent>
+		<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+		<artifactId>order-mgr</artifactId>
+		<version>1.3</version>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+			<artifactId>datatype</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+			<artifactId>persistence-spec</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+			<artifactId>order-mgr-spec</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+			<artifactId>basket-mgr-spec</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+			<artifactId>order-basket-connector</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+			<artifactId>order-payment-connector</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+			<artifactId>order-product-connector</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+			<artifactId>order-logging-connector</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+			<artifactId>order-promotion-connector</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+			<artifactId>order-product-connector</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<optional>true</optional>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>aspectj-maven-plugin</artifactId>
+				<configuration>
+					<aspectLibraries>
+						<aspectLibrary>
+							<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+							<artifactId>order-logging-connector</artifactId>
+						</aspectLibrary>
+						<aspectLibrary>
+							<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+							<artifactId>order-promotion-connector</artifactId>
+						</aspectLibrary>
+					</aspectLibraries>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/layout/main_layout.xhtml">
+	<ui:define name="content">
+		<p:panel id="identificationPanel" header="#{messages['login.title']}">
+			<h:panelGrid columns="2" style="border: transparent;">
+				<p:panel id="returningCustomerPanel">
+					<h3><h:outputText value="#{messages['login.returningCustomer']}" /></h3>
+
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:outputLabel for="emailLoginInput" value="#{messages['login.email']}"/>
+						<p:inputText id="emailLoginInput" value="#{customerManagedBean.emailLogin}" maxlength="50"/>
+
+						<p:outputLabel for="passLoginInput" value="#{messages['login.password']}"/>
+						<p:password id="passLoginInput" value="#{customerManagedBean.passwordLogin}" />
+
+						<p:commandLink actionListener="#">
+							<h:outputText value="#{messages['login.forgotPassword']}" />
+						</p:commandLink>
+
+						<p:commandButton value="#{messages['login.enter']}" action="#{customerManagedBean.login}"/>
+					</h:panelGrid>
+				</p:panel>
+
+				<p:panel id="newCustomerPanel">
+					<h3><h:outputText value="#{messages['login.newCustomer']}" /></h3>
+
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:outputLabel for="newEmailInput" value="#{messages['login.email']}"/>
+						<p:inputText id="newEmailInput" value="#{cadastroManagedBean.emailCadastro}" maxlength="50"/>
+					</h:panelGrid>
+
+					<p:commandButton value="#{messages['login.continue']}" action="#{cadastroManagedBean.novoCadastro}"/>
+				</p:panel>
+			</h:panelGrid>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

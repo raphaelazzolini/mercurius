@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/layout/main_layout.xhtml">
+	<ui:define name="content">
+		<f:event listener="#{productManagedBean.productDetails}" type="preRenderView"></f:event>
+
+		<p:breadCrumb>
+			<ui:repeat var="category" value="#{productManagedBean.categories}">
+				<p:menuitem value="#{category.name}" url="#" />
+			</ui:repeat>
+		</p:breadCrumb>
+
+		<p:panel id="productPanel" >
+			<h1><h:outputText value="#{productManagedBean.product.name} - #{productManagedBean.product.manufacturer.name}"/></h1>
+			<h6><h:outputText value="(#{messages['product.sku']} #{productManagedBean.selectedProductQuantity.sku})"/></h6>
+
+			<p:panelGrid columns="2" style="border: transparent;">
+				<p:galleria value="#{productManagedBean.selectedProductQuantity.productMediumImages}" var="image" panelWidth="500" panelHeight="313">
+				    <p:graphicImage name="#{mainManagedBean.staticPath}#{image.imagePath}" alt="#{productManagedBean.product.name} - #{productManagedBean.product.manufacturer.name}" />
+				</p:galleria>
+			</p:panelGrid>
+			<p:panel>
+				<h5><h:outputText value="#{productManagedBean.product.details}"/></h5>
+				<h:outputText value="#{productManagedBean.product.details}"/>
+
+				<f:subview rendered="#{productManagedBean.product.specialPrice != null and productManagedBean.product.specialPrice > 0}">
+					<h:outputText value="#{messages['product.price.from']} #{productManagedBean.product.price}" />
+				</f:subview>
+				<f:subview rendered="#{productManagedBean.product.specialPrice != null and productManagedBean.product.specialPrice > 0}">
+					<h:outputText value="#{messages['product.price.to']} #{productManagedBean.product.specialPrice}" />
+				</f:subview>
+				<f:subview id="normalPrice" rendered="#{productManagedBean.product.specialPrice == null or productManagedBean.product.specialPrice le 0}">
+					<h:outputText value="#{productManagedBean.product.price}" />
+				</f:subview>
+				<f:subview rendered="#{productManagedBean.product.specialPrice != null and productManagedBean.product.specialPrice > 0}">
+					<h:outputText value="#{messages['product.discount']} #{100-(productManagedBean.product.specialPrice/productManagedBean.product.price*100)}%" />
+				</f:subview>
+			</p:panel>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

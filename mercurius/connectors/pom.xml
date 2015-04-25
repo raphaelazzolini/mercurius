@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+	<artifactId>connectors</artifactId>
+	<packaging>pom</packaging>
+
+	<parent>
+		<groupId>br.unicamp.ic.lsd</groupId>
+		<artifactId>mercurius</artifactId>
+		<version>1.3</version>
+	</parent>
+
+	<name>Connectors</name>
+
+	<modules>
+		<module>basket-logging-connector</module>
+		<module>basket-product-connector</module>
+		<module>order-basket-connector</module>
+		<module>order-product-connector</module>
+		<module>order-payment-connector</module>
+		<module>product-search-logging-connector</module>
+		<module>order-logging-connector</module>
+		<module>customer-security-connector</module>
+		<module>view-exception-handler-connector</module>
+		<module>order-promotion-connector</module>
+		<module>product-search-promotion-connector</module>
+		<module>persistence-cache-connector</module>
+		<module>product-promotion-connector</module>
+		<module>view-customer-connector</module>
+		<module>view-product-search-connector</module>
+		<module>view-basket-connector</module>
+		<module>view-order-connector</module>
+		<module>view-product-connector</module>
+	</modules>
+</project>

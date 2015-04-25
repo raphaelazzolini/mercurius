@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE resources PUBLIC "-//GlassFish.org//DTD GlassFish Application Server 3.1 Resource Definitions//EN"
+"http://glassfish.org/dtds/glassfish-resources_1_5.dtd">
+<resources>
+	<jdbc-connection-pool name="arquillianJDBC"
+		driver-classname="org.hsqldb.jdbcDriver" res-type="java.sql.Driver">
+		<property name="User" value="sa" />
+		<property name="Password" value="" />
+		<property name="URL" value="jdbc:hsqldb:mem:splecommerce-test" />
+		<property name="driverClass" value="org.hsqldb.jdbcDriver" />
+	</jdbc-connection-pool>
+	<jdbc-resource jndi-name="jdbc/arquillian" pool-name="arquillianJDBC" />
+</resources>

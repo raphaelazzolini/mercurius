@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+	<artifactId>product-search-mgr</artifactId>
+	<packaging>pom</packaging>
+
+	<parent>
+		<groupId>br.unicamp.ic.lsd</groupId>
+		<artifactId>mercurius</artifactId>
+		<version>1.3</version>
+	</parent>
+
+	<name>Product Search Manager</name>
+
+	<modules>
+		<module>product-search-mgr-spec</module>
+		<module>product-search-mgr-impl</module>
+	</modules>
+</project>
