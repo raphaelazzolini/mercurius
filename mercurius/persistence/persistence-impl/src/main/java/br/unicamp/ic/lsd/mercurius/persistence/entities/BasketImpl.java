@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.apache.commons.collections4.CollectionUtils;
+
 import br.unicamp.ic.lsd.mercurius.datatype.Basket;
 import br.unicamp.ic.lsd.mercurius.datatype.BasketItem;
 import br.unicamp.ic.lsd.mercurius.datatype.Customer;
@@ -52,8 +54,10 @@ public class BasketImpl implements Basket {
 	@Override
 	public BigDecimal getBasketPrice() {
 		BigDecimal basketPrice = BigDecimal.ZERO;
-		for (BasketItem item : basketItems) {
-			basketPrice = basketPrice.add(item.getTotalPrice());
+		if (CollectionUtils.isNotEmpty(basketItems)) {
+			for (BasketItem item : basketItems) {
+				basketPrice = basketPrice.add(item.getTotalPrice());
+			}
 		}
 		return basketPrice;
 	}

@@ -9,20 +9,26 @@
 
 <h:body>
 	<ui:composition>
+		<script>
+			function callSearch() {
+				jQuery("button[id$='hiddenSearchButton']").click();
+			}
+		</script>
 		<p:panel id="header">
 			<p:graphicImage value="#{mainManagedBean.staticPath}images/header_logo.png" />
 			<p:menubar>
 				<p:menuitem value="#{messages['menu.home']}" url="/" />
 
 				<f:facet name="options">
-		            <p:inputText style="margin-right:10px" placeholder="#{messages['search']}" binding="#{searchText}"
-		            	onkeypress="if (event.keyCode == 13) { window.location.href='busca?q=#{searchText.value}'; return false; }"/>
+		            <p:inputText id="searchText" style="margin-right:10px" placeholder="#{messages['search']}" value="#{productSearchManagedBean.searchText}"/>
+		            <p:commandButton icon="fa fa-search" process="searchText" update="hiddenSearchButton" oncomplete="callSearch()" />
+		            <p:button id="hiddenSearchButton" widgetVar="hiddenSearchButton" href="busca?q=#{productSearchManagedBean.searchText}" style="display: none;"/>
 
-					<p:commandButton value="#{messages['carrinho']}" icon="fa fa-shopping-cart" action="#{basketManagedBean.carrinho}" />
+					<p:button value="#{messages['carrinho']}" icon="fa fa-shopping-cart" href="carrinho" />
 
-		            <p:commandButton value="#{messages['login']}" icon="fa fa-sign-in"
-		            	rendered="#{customerManagedBean.customer == null}" action="#{customerManagedBean.loginPage}" />
-		            <p:commandButton value="#{messages['logout']}" icon="fa fa-sign-out"
+		            <p:button value="#{messages['login']}" icon="fa fa-sign-in"
+		            	rendered="#{customerManagedBean.customer == null}" href="login" />
+		            <p:commandButton value="#{messages['logout']}" icon="fa fa-sign-out" ajax="false"
 		            	rendered="#{customerManagedBean.customer != null}" action="#{customerManagedBean.logout}" />
 		        </f:facet>
 			</p:menubar>

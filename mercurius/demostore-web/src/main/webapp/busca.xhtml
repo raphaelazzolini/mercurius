@@ -12,11 +12,11 @@
 		<f:event listener="#{productSearchManagedBean.search}" type="preRenderView"></f:event>
 			<h6><h:outputText value="#{messages['productSearch.youSearchedFor']} #{productSearchManagedBean.searchText}" /></h6>
 
-			<h:panelGrid columns="4" style="border: transparent;">
+			<p:panelGrid columns="4" styleClass="gridWithoutBorder">
 				<ui:repeat var="product" value="#{productSearchManagedBean.products}">
-					<p:panel id="productPanel" >
+					<p:panel id="productPanel" style="border: transparent;" >
 						<a href="produto?prodId=#{product.id}" title="#{product.name}" class="url">
-							<p:graphicImage name="#{mainManagedBean.staticPath}#{product.mainImage}" height="225" width="225" />
+							<p:graphicImage value="#{mainManagedBean.staticPath}#{product.mainImage}" height="225" width="225" />
 						</a>
 						<a href="produto?prodId=#{product.id}" title="#{product.name}" class="url">
 							<h:outputText value="#{product.name}"/>
@@ -35,7 +35,7 @@
 						</a>
 					</p:panel>
 				</ui:repeat>
-			</h:panelGrid>
+			</p:panelGrid>
 	</ui:define>
 </ui:composition>
 </html>

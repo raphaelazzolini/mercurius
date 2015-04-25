@@ -39,6 +39,9 @@ public class BasketManagedBean implements Serializable {
 	public void init() {
 		viewBasketConnector = ViewBasketConnectorFactory.createInstance();
 		viewBasketMgt = (ViewBasketMgt) viewBasketConnector.getProvidedInterface("ViewBasketMgt");
+		if (basket == null) {
+			basket = viewBasketMgt.newBasket();
+		}
 	}
 
 	public String carrinho() {

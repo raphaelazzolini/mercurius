@@ -1,6 +1,7 @@
 package br.unicamp.ic.lsd.mercurius.view.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -11,6 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.primefaces.model.menu.DefaultMenuItem;
+import org.primefaces.model.menu.DefaultMenuModel;
+import org.primefaces.model.menu.MenuItem;
+import org.primefaces.model.menu.MenuModel;
 
 import br.unicamp.ic.lsd.mercurius.datatype.Category;
 import br.unicamp.ic.lsd.mercurius.datatype.Product;
@@ -54,6 +59,29 @@ public class ProductManagedBean implements Serializable {
 				selectedProductQuantity = product.getQuantities().get(0);
 			}
 		}
+	}
+
+	public MenuModel getCategoriesBreadCrumb() {
+		MenuModel model = new DefaultMenuModel();
+
+		if (product != null && CollectionUtils.isNotEmpty(product.getCategories())) {
+			List<MenuItem> items = new ArrayList<>();
+			Category category = product.getCategories().get(0);
+			MenuItem item = new DefaultMenuItem(category.getName());
+			items.add(item);
+
+			while (category.getParent() != null) {
+				category = category.getParent();
+				item = new DefaultMenuItem(category.getName());
+				items.add(item);
+			}
+
+			for (int i = items.size() - 1; i >= 0; i--) {
+				model.addElement(items.get(i));
+			}
+		}
+
+		return model;
 	}
 
 	public Product getProduct() {

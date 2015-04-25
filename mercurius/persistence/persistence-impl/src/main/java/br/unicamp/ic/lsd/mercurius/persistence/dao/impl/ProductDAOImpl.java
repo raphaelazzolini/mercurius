@@ -23,6 +23,7 @@ import br.unicamp.ic.lsd.mercurius.datatype.factory.ProductFactory;
 import br.unicamp.ic.lsd.mercurius.datatype.factory.ProductQuantityFactory;
 import br.unicamp.ic.lsd.mercurius.persistence.dao.ProductDAO;
 import br.unicamp.ic.lsd.mercurius.persistence.dao.ProductQuantityDAO;
+import br.unicamp.ic.lsd.mercurius.persistence.entities.ProductImpl;
 
 import com.google.common.base.Strings;
 
@@ -90,11 +91,17 @@ public class ProductDAOImpl extends AbstractDAO<Product, Integer> implements Pro
 	public List<Product> searchByText(String text) {
 		Product productEntity = newInstance();
 		FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(em);
+
 		/*
-		 * try { fullTextEntityManager.createIndexer().startAndWait(); } catch
-		 * (InterruptedException e) { // TODO Auto-generated catch block
-		 * e.printStackTrace(); }
+		 * Purge and load the products in the index
 		 */
+		try {
+			fullTextEntityManager.purgeAll(ProductImpl.class);
+			fullTextEntityManager.createIndexer().startAndWait();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
 		QueryBuilder qb = fullTextEntityManager.getSearchFactory().buildQueryBuilder()
 				.forEntity(productEntity.getClass()).get();
 		if (!Strings.isNullOrEmpty(text)) {

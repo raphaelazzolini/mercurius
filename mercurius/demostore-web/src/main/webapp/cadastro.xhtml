@@ -79,7 +79,7 @@
 			</h:panelGrid>
 
 			<h:panelGrid columns="2">
-				<p:commandLink value="#{messages['back']}" action="#{customerManagedBean.loginPage}" immediate="true" />
+				<p:link value="#{messages['back']}" href="login" />
 				<p:commandButton value="#{messages['register.register']}" action="#{cadastroManagedBean.cadastrar}"/>
 			</h:panelGrid>
 		</p:panel>

@@ -9,11 +9,7 @@
 
 <ui:composition template="/layout/main_layout.xhtml">
 	<ui:define name="content">
-		<p:breadCrumb>
-			<ui:repeat var="category" value="#{productManagedBean.categories}">
-				<p:menuitem value="#{category.name}" url="#" />
-			</ui:repeat>
-		</p:breadCrumb>
+		<p:breadCrumb model="#{productManagedBean.categoriesBreadCrumb}" />
 
 		<h3><h:outputText value="#{messages['product.notFound']}" /></h3>
 	</ui:define>
