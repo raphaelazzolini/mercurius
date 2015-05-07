@@ -27,18 +27,26 @@
 					<h:outputText value="#{productManagedBean.product.details}"/>
 				</p:panel>
 
-				<f:subview rendered="#{productManagedBean.product.specialPrice != null and productManagedBean.product.specialPrice > 0}">
-					<h:outputText value="#{messages['product.price.from']} #{productManagedBean.product.price}" />
-				</f:subview>
-				<f:subview rendered="#{productManagedBean.product.specialPrice != null and productManagedBean.product.specialPrice > 0}">
-					<h:outputText value="#{messages['product.price.to']} #{productManagedBean.product.specialPrice}" />
-				</f:subview>
-				<f:subview id="normalPrice" rendered="#{productManagedBean.product.specialPrice == null or productManagedBean.product.specialPrice le 0}">
-					<h:outputText value="#{productManagedBean.product.price}" />
-				</f:subview>
-				<f:subview rendered="#{productManagedBean.product.specialPrice != null and productManagedBean.product.specialPrice > 0}">
-					<h:outputText value="#{messages['product.discount']} #{100-(productManagedBean.product.specialPrice/productManagedBean.product.price*100)}%" />
-				</f:subview>
+				<p:commandButton value="#{messages['comprar']}" icon="fa fa-cart-plus" ajax="false"
+		            	action="#{basketManagedBean.comprar}" >
+		            	<f:setPropertyActionListener target="#{basketManagedBean.produtoInserir}"
+							value="#{productManagedBean.selectedProductQuantity}" />
+				</p:commandButton>
+
+				<p:panel>
+					<f:subview rendered="#{productManagedBean.product.specialPrice != null and productManagedBean.product.specialPrice > 0}">
+						<h:outputText value="#{messages['product.price.from']} #{productManagedBean.product.priceFormatted}" />
+					</f:subview>
+					<f:subview rendered="#{productManagedBean.product.specialPrice != null and productManagedBean.product.specialPrice > 0}">
+						<h:outputText value="#{messages['product.price.to']} #{productManagedBean.product.specialPriceFormatted}" />
+					</f:subview>
+					<f:subview id="normalPrice" rendered="#{productManagedBean.product.specialPrice == null or productManagedBean.product.specialPrice le 0}">
+						<h:outputText value="#{productManagedBean.product.priceFormatted}" />
+					</f:subview>
+					<f:subview rendered="#{productManagedBean.product.specialPrice != null and productManagedBean.product.specialPrice > 0}">
+						<h:outputText value="#{messages['product.discount']} #{100-(productManagedBean.product.specialPrice/productManagedBean.product.price*100)}%" />
+					</f:subview>
+				</p:panel>
 			</p:panelGrid>
 		</p:panel>
 	</ui:define>

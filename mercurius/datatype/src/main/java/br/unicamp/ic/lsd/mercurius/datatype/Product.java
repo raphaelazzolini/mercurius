@@ -238,4 +238,8 @@ public interface Product extends Serializable {
 	 */
 	void setSpecialPrice(BigDecimal specialPrice);
 
+	String getPriceFormatted();
+
+	String getSpecialPriceFormatted();
+
 }

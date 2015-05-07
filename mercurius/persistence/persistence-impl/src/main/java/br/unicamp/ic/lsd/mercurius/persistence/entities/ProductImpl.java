@@ -1,8 +1,11 @@
 package br.unicamp.ic.lsd.mercurius.persistence.entities;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,6 +23,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.solr.analysis.ASCIIFoldingFilterFactory;
 import org.apache.solr.analysis.BrazilianStemFilterFactory;
 import org.apache.solr.analysis.LowerCaseFilterFactory;
@@ -120,6 +124,12 @@ public class ProductImpl implements Product {
 
 	@Transient
 	private BigDecimal specialPrice;
+
+	@Transient
+	private String priceFormatted;
+
+	@Transient
+	private String specialPriceFormatted;
 
 	@Override
 	public Integer getId() {
@@ -302,6 +312,26 @@ public class ProductImpl implements Product {
 	@Override
 	public void setSpecialPrice(BigDecimal specialPrice) {
 		this.specialPrice = specialPrice;
+	}
+
+	@Override
+	public String getPriceFormatted() {
+		if (StringUtils.isBlank(priceFormatted)) {
+			DecimalFormat decimalFormat = new DecimalFormat("R$ ###,###.00", new DecimalFormatSymbols(new Locale("pt",
+					"BR")));
+			priceFormatted = decimalFormat.format(price);
+		}
+		return priceFormatted;
+	}
+
+	@Override
+	public String getSpecialPriceFormatted() {
+		if (StringUtils.isBlank(specialPriceFormatted)) {
+			DecimalFormat decimalFormat = new DecimalFormat("R$ ###,###.00", new DecimalFormatSymbols(new Locale("pt",
+					"BR")));
+			specialPriceFormatted = decimalFormat.format(specialPrice);
+		}
+		return specialPriceFormatted;
 	}
 
 	@Override

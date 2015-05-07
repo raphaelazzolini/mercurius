@@ -68,7 +68,7 @@
 							<h:outputText value="#{messages['basket.subtotal']}" />
 						</p:column>
 						<p:column>
-							<h:outputText value="#{basketManagedBean.basket.basketPrice}}" />
+							<h:outputText value="#{basketManagedBean.basket.basketPrice}" />
 						</p:column>
 					</p:row>
 
@@ -91,6 +91,8 @@
 					</p:row>
 				</f:facet>
 			</p:panelGrid>
+
+			<p:commandLink action="#{basketManagedBean.checkout}" value="#{messages['basket.checkout']}" />
 		</p:panel>
 	</ui:define>
 </ui:composition>
