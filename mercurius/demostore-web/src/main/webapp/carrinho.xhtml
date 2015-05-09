@@ -11,86 +11,74 @@
 	<ui:define name="content">
 		<p:panel id="identificationPanel" header="#{messages['basket.title']}">
 
-			<p:panelGrid columns="3" style="border: transparent;">
-				<f:facet name="header">
+			<p:dataTable var="item" value="#{basketManagedBean.basketItems}">
+				<p:column>
+					<a href="produto?prodId=#{product.id}" title="#{product.name}" class="url">
+						<p:graphicImage value="#{mainManagedBean.staticPath}#{item.product.mainImage}" />
+					</a>
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages['basket.product']}" />
+					</f:facet>
+					<a href="produto?prodId=#{product.id}" title="#{product.name}" class="url">
+						<h:outputText value="#{item.product.name} #{item.product.manufacturer.name}" />
+					</a>
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages['basket.productQuantity']}" />
+					</f:facet>
+					<a href="produto?prodId=#{product.id}" title="#{product.name}" class="url">
+						<h:outputText value="#{item.itemPrice/item.quantity}" />
+					</a>
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages['basket.productValue']}" />
+					</f:facet>
+					<a href="produto?prodId=#{product.id}" title="#{product.name}" class="url">
+						<h:outputText value="#{item.quantity}" />
+					</a>
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages['basket.productTotal']}" />
+					</f:facet>
+					<a href="produto?prodId=#{product.id}" title="#{product.name}" class="url">
+						<h:outputText value="#{item.itemPrice}" />
+					</a>
+				</p:column>
+				<p:columnGroup type="footer">
 					<p:row>
-						<p:column></p:column>
-						<p:column>
-							<h:outputText value="#{messages['basket.product']}" />
-						</p:column>
-						<p:column>
-							<h:outputText value="#{messages['basket.productValue']}" />
-						</p:column>
-						<p:column>
-							<h:outputText value="#{messages['basket.productQuantity']}" />
-						</p:column>
-						<p:column>
-							<h:outputText value="#{messages['basket.productTotal']}" />
-						</p:column>
-					</p:row>
-				</f:facet>
-				<ui:repeat var="item" value="#{basketManagedBean.basketItems}">
-					<p:row>
-						<p:column>
-							<a href="produto?prodId=#{product.id}" title="#{product.name}" class="url">
-								<p:graphicImage name="#{mainManagedBean.staticPath}#{item.product.mainImage}" />
-							</a>
-						</p:column>
-
-						<p:column>
-							<a href="produto?prodId=#{product.id}" title="#{product.name}" class="url">
-								<h:outputText value="#{item.product.name} #{item.product.manufacturer.name}" />
-							</a>
-						</p:column>
-
-						<p:column>
-							<a href="produto?prodId=#{product.id}" title="#{product.name}" class="url">
-								<h:outputText value="#{item.itemPrice/item.quantity}" />
-							</a>
-						</p:column>
-
-						<p:column>
-							<a href="produto?prodId=#{product.id}" title="#{product.name}" class="url">
-								<h:outputText value="#{item.quantity}" />
-							</a>
-						</p:column>
-
-						<p:column>
-							<a href="produto?prodId=#{product.id}" title="#{product.name}" class="url">
-								<h:outputText value="#{item.itemPrice}" />
-							</a>
-						</p:column>
-					</p:row>
-				</ui:repeat>
-				<f:facet name="footer">
-					<p:row>
-						<p:column>
-							<h:outputText value="#{messages['basket.subtotal']}" />
-						</p:column>
-						<p:column>
-							<h:outputText value="#{basketManagedBean.basket.basketPrice}" />
-						</p:column>
+						<p:column />
+						<p:column />
+						<p:column />
+						<p:column footerText="#{messages['basket.subtotal']}" />
+						<p:column footerText="#{basketManagedBean.basket.basketPrice}" />
 					</p:row>
 
 					<p:row>
-						<p:column>
-							<h:outputText value="#{messages['basket.shipping']}" />
-						</p:column>
-						<p:column>
-							<h:outputText value="" />
-						</p:column>
+						<p:column />
+						<p:column />
+						<p:column />
+						<p:column footerText="#{messages['basket.shipping']}" />
+						<p:column footerText="" />
 					</p:row>
 
 					<p:row>
-						<p:column>
-							<h:outputText value="#{messages['basket.total']}" />
-						</p:column>
-						<p:column>
-							<h:outputText value="#{basketManagedBean.basket.basketPrice}" />
-						</p:column>
+						<p:column />
+						<p:column />
+						<p:column />
+						<p:column footerText="#{messages['basket.total']}" />
+						<p:column footerText="#{basketManagedBean.basket.basketPrice}" />
 					</p:row>
-				</f:facet>
-			</p:panelGrid>
+				</p:columnGroup>
+			</p:dataTable>
 
 			<p:commandLink action="#{basketManagedBean.checkout}" value="#{messages['basket.checkout']}" />
 		</p:panel>
