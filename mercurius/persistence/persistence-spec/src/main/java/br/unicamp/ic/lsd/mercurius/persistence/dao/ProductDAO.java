@@ -20,4 +20,6 @@ public interface ProductDAO extends DAO<Product, Integer> {
 
 	Product loadProductImages(Product product);
 
+	Long getProductCount();
+
 }

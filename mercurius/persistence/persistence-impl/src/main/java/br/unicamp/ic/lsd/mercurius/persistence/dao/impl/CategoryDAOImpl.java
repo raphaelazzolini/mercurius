@@ -1,6 +1,7 @@
 package br.unicamp.ic.lsd.mercurius.persistence.dao.impl;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -12,6 +13,7 @@ import javax.persistence.TypedQuery;
 import org.hibernate.Hibernate;
 
 import br.unicamp.ic.lsd.mercurius.datatype.Category;
+import br.unicamp.ic.lsd.mercurius.datatype.Product;
 import br.unicamp.ic.lsd.mercurius.datatype.factory.CategoryFactory;
 import br.unicamp.ic.lsd.mercurius.persistence.dao.CategoryDAO;
 
@@ -64,6 +66,28 @@ public class CategoryDAOImpl extends AbstractDAO<Category, Integer> implements C
 		}
 
 		return resultList;
+	}
+
+	@Override
+	public List<Category> getCategoriesWithoutProduct(Product product) {
+		EntityManager entityManager = getEntityManager();
+		TypedQuery<? extends Category> query = entityManager.createQuery(
+				"from Category c where c.products <> :product", getEntityClass());
+		query.setParameter("product", product);
+
+		List<Category> resultList = new ArrayList<Category>();
+		for (Category category : query.getResultList()) {
+			resultList.add(category);
+		}
+
+		return resultList;
+	}
+
+	@Override
+	public List<Category> findByIds(Collection<Integer> ids) {
+		TypedQuery<Category> query = getEntityManager().createQuery("from Category where id in(:ids)", Category.class);
+		query.setParameter("ids", ids);
+		return query.getResultList();
 	}
 
 }

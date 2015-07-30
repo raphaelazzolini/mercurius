@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<ui:composition template="/WEB-INF/layout/layout.xhtml">
+	<ui:define name="content">
+		<ui:fragment rendered="#{not productsAdminMBean.editing and not productsAdminMBean.cropImage}" >
+			<p:fieldset legend="#{messages['admin.products.title']}">
+				<p:dataTable id="productsDataTable" var="product" value="#{productsAdminMBean.products}"
+					paginator="true" rows="10" paginatorPosition="bottom" lazy="true">
+					<p:column headerText="#{messages['admin.products.image']}" >
+						<p:graphicImage value="#{adminMainMBean.imagesPath}small/#{product.quantities[0].productImages[0].imagePath}" />
+					</p:column>
+
+					<p:column headerText="#{messages['admin.products.name']}" >
+						<h:outputText value="#{product.name}" />
+					</p:column>
+
+					<p:column headerText="#{messages['admin.products.categories']}" >
+						#{productsAdminMBean.getCategoriasString(product)}
+					</p:column>
+
+					<p:column>
+						<p:commandButton value="#{messages['button.edit']}" action="#{productsAdminMBean.edit}" update="@form" >
+							<f:setPropertyActionListener value="#{product}" target="#{productsAdminMBean.product}" />
+						</p:commandButton>
+
+						<p:commandButton value="#{messages['button.delete']}" action="#{productsAdminMBean.delete}" update="productsDataTable" style="margin-right:0 !important">
+							<f:setPropertyActionListener value="#{product}" target="#{productsAdminMBean.product}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+
+				<p:commandButton value="#{messages['admin.products.new']}" action="#{productsAdminMBean.newProduct}" update="@form" />
+			</p:fieldset>
+		</ui:fragment>
+
+		<ui:fragment rendered="#{productsAdminMBean.editing and not productsAdminMBean.editingSku}" >
+			<p:fieldset legend="#{productsAdminMBean.product.id == null ? messages['admin.products.new'] : messages['admin.products.edit']}">
+				<h:panelGrid columns="2" style="border: transparent;">
+					<p:outputLabel for="nameInput" value="#{messages['admin.products.name']}" />
+					<p:inputText id="nameInput" value="#{productsAdminMBean.product.name}" required="true" >
+						<p:ajax process="@this" event="change" />
+					</p:inputText>
+
+					<p:outputLabel for="detailsInput" value="#{messages['admin.products.details']}" />
+					<p:inputTextarea id="detailsInput" value="#{productsAdminMBean.product.details}" rows="10" cols="25"
+						required="true" styleClass="form-control" >
+						<p:ajax process="@this" event="change" />
+					</p:inputTextarea>
+
+					<p:outputLabel for="technicalDetailsInput" value="#{messages['admin.products.technical_details']}" />
+					<p:inputTextarea id="technicalDetailsInput" value="#{productsAdminMBean.product.technicalDetails}" rows="10" cols="25"
+						styleClass="form-control" >
+						<p:ajax process="@this" event="change" />
+					</p:inputTextarea>
+
+					<p:outputLabel for="manufactorerSelect" value="#{messages['admin.products.manufacturer']}" />
+					<p:selectOneMenu id="manufactorerSelect" value="#{productsAdminMBean.selectedManufacturerer}">
+				    	<f:selectItem itemLabel="#{messages['one_menu.select_one']}" itemValue="" />
+	            		<f:selectItems value="#{productsAdminMBean.manufacturerers}" />
+	            		<p:ajax process="@this" event="change" />
+				    </p:selectOneMenu>
+
+				    <p:outputLabel for="dataAvailable" value="#{messages['admin.products.date_available']}" />
+	       			<p:calendar id="dataAvailable" value="#{productsAdminMBean.product.dateAvailable}" showOn="button" >
+	       				<p:ajax process="@this" event="change" />
+	       			</p:calendar>
+
+	       			<p:outputLabel for="weightInput" value="#{messages['admin.products.weight']}" />
+	       			<pe:inputNumber id="weightInput" value="#{productsAdminMBean.product.weight}" >
+	       				<p:ajax process="@this" event="change" />
+	       			</pe:inputNumber>
+
+	       			<p:outputLabel for="widthInput" value="#{messages['admin.products.width']}" />
+	       			<pe:inputNumber id="widthInput" value="#{productsAdminMBean.product.width}" >
+	       				<p:ajax process="@this" event="change" />
+	       			</pe:inputNumber>
+
+	       			<p:outputLabel for="heightInput" value="#{messages['admin.products.height']}" />
+	       			<pe:inputNumber id="heightInput" value="#{productsAdminMBean.product.height}" >
+	       				<p:ajax process="@this" event="change" />
+	       			</pe:inputNumber>
+
+	       			<p:outputLabel for="priceInput" value="#{messages['admin.products.price']}" />
+	       			<pe:inputNumber id="priceInput" value="#{productsAdminMBean.product.price}" >
+	       				<p:ajax process="@this" event="change" />
+	       			</pe:inputNumber>
+
+	       			<p:outputLabel for="categoriesSelect" value="#{messages['admin.products.categories']}" />
+	       			<p:selectManyMenu id="categoriesSelect" value="#{productsAdminMBean.selectedCategories}" filter="true"
+						filterMatchMode="contains" showCheckbox="true" converter="javax.faces.Integer">
+						<f:selectItems value="#{productsAdminMBean.categories}" />
+						<p:ajax process="@this" event="change" />
+					</p:selectManyMenu>
+				</h:panelGrid>
+
+			    <p:dataTable id="skusDataTable" var="sku" value="#{productsAdminMBean.product.quantities}"
+					paginator="true" rows="10" paginatorPosition="bottom" rowIndexVar="rowIndex">
+					<p:column headerText="#{messages['admin.products.sku']}" >
+						<h:outputText value="#{sku.sku}" />
+					</p:column>
+
+					<p:column headerText="#{messages['admin.products.quantity']}" >
+						<h:outputText value="#{sku.quantity}" />
+					</p:column>
+
+					<p:column>
+						<p:commandButton value="#{messages['button.edit']}" action="#{productsAdminMBean.editSku}" update="@form" immediate="true" >
+							<f:setPropertyActionListener value="#{sku}" target="#{productsAdminMBean.sku}" />
+						</p:commandButton>
+
+						<p:commandButton value="#{messages['button.delete']}" action="#{productsAdminMBean.deleteSku}" update="skusDataTable"
+							style="margin-right:0 !important" immediate="true">
+							<f:setPropertyActionListener value="#{sku}" target="#{productsAdminMBean.sku}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+
+				<p:commandButton value="#{messages['admin.products.new_sku']}" action="#{productsAdminMBean.newSku}" update="@form" immediate="true" />
+
+				<br />
+				<br />
+
+				<p:commandButton value="#{messages['button.save']}" action="#{productsAdminMBean.save}" update="@form" />
+				<p:commandButton value="#{messages['button.cancel']}" action="#{productsAdminMBean.cancelEdit}" immediate="true" update="@form" />
+			</p:fieldset>
+		</ui:fragment>
+
+		<ui:fragment rendered="#{productsAdminMBean.editingSku}" >
+			<p:fieldset legend="#{productsAdminMBean.product.id == null ? messages['admin.products.new'] : messages['admin.products.edit']}">
+				<h:panelGrid columns="2" style="border: transparent;">
+					<p:outputLabel for="skuInput" value="#{messages['admin.products.sku']}" />
+					<p:inputText id="skuInput" value="#{productsAdminMBean.sku.sku}" required="true" >
+						<p:ajax process="@this" event="change" />
+					</p:inputText>
+
+					<p:outputLabel for="quantityInput" value="#{messages['admin.products.quantity']}" />
+					<p:inputText id="quantityInput" value="#{productsAdminMBean.sku.quantity}" required="true" type="number" >
+						<p:ajax process="@this" event="change" />
+					</p:inputText>
+				</h:panelGrid>
+
+				<p:dataTable id="imagesDataTable" var="image" value="#{productsAdminMBean.sku.productImages}"
+					paginator="true" rows="10" paginatorPosition="bottom" rowIndexVar="rowIndex">
+					<f:facet name="header">
+						<h:outputText value="#{messages['admin.products.images']}" />
+					</f:facet>
+
+					<p:column>
+						<p:graphicImage value="#{adminMainMBean.imagesPath}small/#{image.imagePath}" />
+					</p:column>
+
+					<p:column>
+						<p:commandButton value="#{messages['button.delete']}" action="#{productsAdminMBean.deleteImage}" update="imagesDataTable"
+							immediate="true" style="margin-right:0 !important">
+							<f:setPropertyActionListener value="#{image}" target="#{productsAdminMBean.image}" />
+							<f:setPropertyActionListener value="#{rowIndex}" target="#{productsAdminMBean.rowIndex}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+
+				<p:fileUpload fileUploadListener="#{productsAdminMBean.handleFileUpload}" mode="advanced" dragDropSupport="true"
+                	update="@form" sizeLimit="3145728" allowTypes="/(\.|\/)(jpe?g|png)$/" fileLimit="1" label="#{messages['admin.products.new_image']}"
+                	cancelLabel="#{messages['button.cancel']}" invalidSizeMessage="#{messages['admin.products.big_image']}"
+                	invalidFileMessage="#{messages['admin.products.invalid_image']}" auto="true" />
+
+				<p:commandButton value="#{messages['button.save']}" action="#{productsAdminMBean.saveSku}" update="@form" />
+				<p:commandButton value="#{messages['button.cancel']}" action="#{productsAdminMBean.cancelEditSku}" immediate="true" update="@form" />
+			</p:fieldset>
+		</ui:fragment>
+
+		<ui:fragment rendered="#{productsAdminMBean.cropImage}" >
+			<p:fieldset legend="#{messages['admin.products.crop_image']}">
+			    <p:imageCropper value="#{productsAdminMBean.croppedImage}" image="#{adminMainMBean.imagesPath}tmp/#{productsAdminMBean.tmpFileName}" initialCoords="0,0,400,500"
+			    	aspectRatio="1" minSize="1000,1000" />
+
+			    <p:commandButton value="#{messages['button.cancel']}" action="#{productsAdminMBean.cancelarCortarImagem}" update="@form" />
+			    <p:commandButton value="#{messages['button.save']}" action="#{productsAdminMBean.saveImage}" update="@form" />
+		    </p:fieldset>
+		</ui:fragment>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,5 +1,6 @@
 package br.unicamp.ic.lsd.mercurius.productmgr.impl;
 
+import java.util.Collection;
 import java.util.List;
 
 import br.unicamp.ic.lsd.mercurius.categorymgr.spec.prov.CategoryMgt;
@@ -44,6 +45,16 @@ class CategoryFacade implements ProductCategoryMgt {
 	@Override
 	public Category saveCategory(Category category) {
 		return internalCategoryMgt.saveCategory(category);
+	}
+
+	@Override
+	public List<Category> getAllCategories() {
+		return internalCategoryMgt.getAllCategories();
+	}
+
+	@Override
+	public List<Category> getCategoriesByIds(Collection<Integer> ids) {
+		return internalCategoryMgt.getCategoriesByIds(ids);
 	}
 
 }

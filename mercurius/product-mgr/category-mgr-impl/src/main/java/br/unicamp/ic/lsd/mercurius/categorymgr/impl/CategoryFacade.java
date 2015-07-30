@@ -1,5 +1,6 @@
 package br.unicamp.ic.lsd.mercurius.categorymgr.impl;
 
+import java.util.Collection;
 import java.util.List;
 
 import br.unicamp.ic.lsd.mercurius.categorymgr.spec.prov.CategoryManager;
@@ -40,6 +41,16 @@ class CategoryFacade implements CategoryMgt {
 	@Override
 	public Category saveCategory(Category category) {
 		return categoryMgt.saveCategory(category);
+	}
+
+	@Override
+	public List<Category> getAllCategories() {
+		return manager.getCategoryDAO().getAll();
+	}
+
+	@Override
+	public List<Category> getCategoriesByIds(Collection<Integer> ids) {
+		return manager.getCategoryDAO().findByIds(ids);
 	}
 
 }

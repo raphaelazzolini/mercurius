@@ -2,7 +2,6 @@ package br.unicamp.ic.lsd.mercurius.persistence.entities;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,7 +33,7 @@ public class ProductOptionImpl implements ProductOption {
 	@Column(name = "product_option_name", nullable = false)
 	private String name;
 
-	@OneToMany(mappedBy = "option", cascade = CascadeType.ALL, targetEntity = ProductAttributeImpl.class)
+	@OneToMany(mappedBy = "option", targetEntity = ProductAttributeImpl.class)
 	private List<ProductAttribute> attributes;
 
 	@Override

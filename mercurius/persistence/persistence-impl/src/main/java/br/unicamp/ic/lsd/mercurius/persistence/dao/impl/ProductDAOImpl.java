@@ -8,6 +8,7 @@ import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.lucene.search.Query;
@@ -22,6 +23,7 @@ import br.unicamp.ic.lsd.mercurius.datatype.ProductQuantity;
 import br.unicamp.ic.lsd.mercurius.datatype.factory.ProductFactory;
 import br.unicamp.ic.lsd.mercurius.datatype.factory.ProductQuantityFactory;
 import br.unicamp.ic.lsd.mercurius.persistence.dao.ProductDAO;
+import br.unicamp.ic.lsd.mercurius.persistence.dao.ProductImageDAO;
 import br.unicamp.ic.lsd.mercurius.persistence.dao.ProductQuantityDAO;
 import br.unicamp.ic.lsd.mercurius.persistence.entities.ProductImpl;
 
@@ -38,6 +40,9 @@ public class ProductDAOImpl extends AbstractDAO<Product, Integer> implements Pro
 
 	@EJB
 	private ProductQuantityDAO productQuantityDAO;
+
+	@EJB
+	private ProductImageDAO productImageDAO;
 
 	@EJB
 	private ProductFactory productFactory;
@@ -134,9 +139,16 @@ public class ProductDAOImpl extends AbstractDAO<Product, Integer> implements Pro
 	private void loadImagesFromQuantities(List<ProductQuantity> quantities) {
 		if (CollectionUtils.isNotEmpty(quantities)) {
 			for (ProductQuantity quantity : quantities) {
+				Hibernate.initialize(quantity.getProductsAttributes());
 				Hibernate.initialize(quantity.getProductImages());
 			}
 		}
+	}
+
+	@Override
+	public Long getProductCount() {
+		TypedQuery<Long> query = em.createQuery("select count(p.id) from Product p", Long.class);
+		return query.getSingleResult();
 	}
 
 }

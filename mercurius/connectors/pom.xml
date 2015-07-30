@@ -34,5 +34,6 @@
 		<module>view-basket-connector</module>
 		<module>view-order-connector</module>
 		<module>view-product-connector</module>
+		<module>admin-product-connector</module>
 	</modules>
 </project>

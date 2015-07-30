@@ -8,6 +8,7 @@ import org.hibernate.Hibernate;
 
 import br.unicamp.ic.lsd.mercurius.datatype.ProductQuantity;
 import br.unicamp.ic.lsd.mercurius.datatype.factory.ProductQuantityFactory;
+import br.unicamp.ic.lsd.mercurius.persistence.dao.ProductImageDAO;
 import br.unicamp.ic.lsd.mercurius.persistence.dao.ProductQuantityDAO;
 
 @Stateless(name = "productQuantityDAO")
@@ -18,6 +19,9 @@ public class ProductQuantityDAOImpl extends AbstractDAO<ProductQuantity, String>
 
 	@EJB
 	private ProductQuantityFactory productQuantityFactory;
+
+	@EJB
+	private ProductImageDAO productImageDAO;
 
 	private static Class<? extends ProductQuantity> entityClass;
 

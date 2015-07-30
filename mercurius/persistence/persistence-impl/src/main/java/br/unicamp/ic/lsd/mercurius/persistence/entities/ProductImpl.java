@@ -3,6 +3,7 @@ package br.unicamp.ic.lsd.mercurius.persistence.entities;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -117,7 +118,7 @@ public class ProductImpl implements Product {
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "product", cascade = CascadeType.ALL,
 			targetEntity = ProductQuantityImpl.class)
-	private List<ProductQuantity> quantities;
+	private List<ProductQuantity> quantities = new ArrayList<>();
 
 	@Transient
 	private String mainImage;
@@ -275,6 +276,7 @@ public class ProductImpl implements Product {
 		return quantities;
 	}
 
+	@Override
 	public void setQuantities(List<ProductQuantity> quantities) {
 		this.quantities = quantities;
 	}
@@ -285,15 +287,7 @@ public class ProductImpl implements Product {
 			ProductQuantity mainQuantity = quantities.get(0);
 			if (CollectionUtils.isNotEmpty(mainQuantity.getProductImages())) {
 				List<ProductImage> images = mainQuantity.getProductImages();
-				for (ProductImage image : images) {
-					if (mainImage == null) {
-						mainImage = image.getImagePath();
-					}
-					if (image.getImageType().equals("MEDIUM")) {
-						mainImage = image.getImagePath();
-						break;
-					}
-				}
+				mainImage = images.get(0).getImagePath();
 			}
 		}
 		return mainImage;

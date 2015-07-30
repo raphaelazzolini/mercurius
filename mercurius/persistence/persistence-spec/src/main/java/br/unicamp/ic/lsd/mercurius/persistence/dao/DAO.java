@@ -21,6 +21,8 @@ public interface DAO<T extends Serializable, ID extends Serializable> extends Se
 
 	List<T> getAll();
 
+	List<T> getAll(int offset, int maxResults);
+
 	T newInstance();
 
 	void refresh(T c);

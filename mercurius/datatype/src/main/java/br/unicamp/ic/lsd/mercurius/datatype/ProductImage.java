@@ -12,20 +12,6 @@ public interface ProductImage extends Serializable {
 	Integer getId();
 
 	/**
-	 * Returns the type of the image.
-	 * 
-	 * @return
-	 */
-	String getImageType();
-
-	/**
-	 * Sets the type of the image.
-	 * 
-	 * @param type
-	 */
-	void setImageType(String imageType);
-
-	/**
 	 * Return the path of the image.
 	 * 
 	 * @return

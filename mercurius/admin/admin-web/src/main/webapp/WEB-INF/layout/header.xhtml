@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition>
+		<script>
+			function logout() {
+				//$.post("../logout", {${_csrf.parameterName}: "${_csrf.token}"} ,function(data){
+				$.post("../logout", function(data){
+					self.location="../admin"
+ 				});
+			}
+		</script>
+
+		<p:panel id="header" styleClass="header-panel">
+			<div class="header-background" style="padding-bottom: 30px">
+				<p:graphicImage value="/images/logo.png" styleClass="img-responsive" />
+			</div>
+			<p:menubar>
+				<p:menuitem value="#{messages['admin.menu.home']}" outcome="/index" />
+				<p:menuitem value="#{messages['admin.menu.produtos']}" outcome="/produtos" />
+			</p:menubar>
+		</p:panel>
+	</ui:composition>
+</h:body>
+</html>

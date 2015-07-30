@@ -5,7 +5,10 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import br.unicamp.ic.lsd.mercurius.categorymgr.impl.CategoryMgrComponentFactory;
+import br.unicamp.ic.lsd.mercurius.persistence.dao.ConfigurationDAO;
+import br.unicamp.ic.lsd.mercurius.persistence.dao.ManufactoryDAO;
 import br.unicamp.ic.lsd.mercurius.persistence.dao.ProductDAO;
+import br.unicamp.ic.lsd.mercurius.persistence.dao.ProductImageDAO;
 import br.unicamp.ic.lsd.mercurius.persistence.dao.ProductQuantityDAO;
 import br.unicamp.ic.lsd.mercurius.productmgr.spec.prov.ProductCategoryMgt;
 import br.unicamp.ic.lsd.mercurius.productmgr.spec.prov.ProductManager;
@@ -24,6 +27,9 @@ class Manager extends AManagerComposite implements ProductManager {
 
 	private ProductDAO productDAO;
 	private ProductQuantityDAO productQuantityDAO;
+	private ProductImageDAO productImageDAO;
+	private ManufactoryDAO manufactoryDAO;
+	private ConfigurationDAO configurationDAO;
 
 	Manager() {
 		super();
@@ -31,6 +37,10 @@ class Manager extends AManagerComposite implements ProductManager {
 			Context context = new InitialContext();
 			productDAO = (ProductDAO) context.lookup("java:app/persistence/productDAO");
 			productQuantityDAO = (ProductQuantityDAO) context.lookup("java:app/persistence/productQuantityDAO");
+			productImageDAO = (ProductImageDAO) context.lookup("java:app/persistence/productImageDAO");
+			manufactoryDAO = (ManufactoryDAO) context.lookup("java:app/persistence/manufactoryDAO");
+			configurationDAO = (ConfigurationDAO) context.lookup("java:app/persistence/configurationDAO");
+
 			setProvidedInterface(PRODUCT_MGT, new ProductFacade(this));
 			setProvidedInterface(I_MANAGER, this);
 			setProvidedInterfaceType(PRODUCT_MGT, ProductMgt.class);
@@ -51,6 +61,21 @@ class Manager extends AManagerComposite implements ProductManager {
 	@Override
 	public ProductQuantityDAO getProductQuantityDAO() {
 		return productQuantityDAO;
+	}
+
+	@Override
+	public ProductImageDAO getProductImageDAO() {
+		return productImageDAO;
+	}
+
+	@Override
+	public ManufactoryDAO getManufactoryDAO() {
+		return manufactoryDAO;
+	}
+
+	@Override
+	public ConfigurationDAO getConfigurationDAO() {
+		return configurationDAO;
 	}
 
 }

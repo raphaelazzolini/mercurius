@@ -47,4 +47,11 @@ public interface Manufacturer extends Serializable {
 	 */
 	List<Product> getProducts();
 
+	/**
+	 * Sets the products of the manufacturer.
+	 * 
+	 * @param products
+	 */
+	void setProducts(List<Product> products);
+
 }

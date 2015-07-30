@@ -1,10 +1,13 @@
 package br.unicamp.ic.lsd.mercurius.productmgr.spec.prov;
 
+import java.io.IOException;
 import java.util.List;
 
 import br.unicamp.ic.lsd.mercurius.datatype.Category;
+import br.unicamp.ic.lsd.mercurius.datatype.Manufacturer;
 import br.unicamp.ic.lsd.mercurius.datatype.Product;
 import br.unicamp.ic.lsd.mercurius.datatype.ProductAttribute;
+import br.unicamp.ic.lsd.mercurius.datatype.ProductImage;
 import br.unicamp.ic.lsd.mercurius.datatype.ProductQuantity;
 
 public interface ProductMgt {
@@ -57,5 +60,98 @@ public interface ProductMgt {
 	 * @return
 	 */
 	ProductQuantity getProductQuantity(String sku);
+
+	/**
+	 * Returns a new {@link Product} instance
+	 * 
+	 * @return
+	 */
+	Product newProductInstance();
+
+	/**
+	 * Removes a product from database
+	 * 
+	 * @param product
+	 */
+	void remove(Product product);
+
+	/**
+	 * Removes a product image
+	 * 
+	 * @param product
+	 */
+	void deleteProductImage(ProductImage image);
+
+	/**
+	 * Returns a list with all manufacturers from database
+	 * 
+	 * @return
+	 */
+	List<Manufacturer> getManufacturerers();
+
+	/**
+	 * Returns a new {@link ProductQuantity} instance
+	 * 
+	 * @return
+	 */
+	ProductQuantity newProductQuantityInstance();
+
+	/**
+	 * Saves {@link ProductQuantity} to database
+	 * 
+	 * @param productQuantity
+	 * @return
+	 */
+	ProductQuantity saveProductQuantity(ProductQuantity productQuantity);
+
+	/**
+	 * Removes a {@link ProductQuantity} from database
+	 * 
+	 * @return
+	 */
+	void deleteProductQuantity(ProductQuantity productQuantity);
+
+	/**
+	 * Saves the image file with the correct sizes
+	 * 
+	 * @param imageName
+	 * @param imageBytes
+	 * @return
+	 * @throws IOException
+	 */
+	ProductImage saveImage(String imageName, byte[] imageBytes) throws IOException;
+
+	/**
+	 * Saves the product image in the database
+	 * 
+	 * @param productImage
+	 * @return
+	 */
+	ProductImage saveProductImage(ProductImage productImage);
+
+	/**
+	 * Returns a list of {@link Product} limited by the offset and max number of
+	 * results
+	 * 
+	 * @param offset
+	 * @param maxResults
+	 * @return
+	 */
+	List<Product> getProductList(int offset, int maxResults);
+
+	/**
+	 * Returns the total of products in the database
+	 * 
+	 * @return
+	 */
+	Integer getTotalProducts();
+
+	/**
+	 * Returns a {@link Manufacturer} by its id
+	 * 
+	 * @param id
+	 * @return
+	 */
+	Manufacturer getManufacturerById(Integer id);
 
 }

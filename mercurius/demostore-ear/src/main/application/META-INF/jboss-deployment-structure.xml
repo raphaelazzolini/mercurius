@@ -1,0 +1,15 @@
+<jboss-deployment-structure>
+	<ear-subdeployments-isolated>true</ear-subdeployments-isolated>
+
+	<deployment>
+		<dependencies>
+			<module name="com.mysql" export="true" />
+			<module name="javax.enterprise.api" export="true" />
+			<module name="javax.annotation.api" export="true" />
+			<module name="javax.ejb.api" export="true" />
+			<module name="com.google.guava" export="true" />
+			<module name="org.apache.commons.beanutils" export="true" />
+			<module name="org.apache.commons.io" export="true" />
+		</dependencies>
+	</deployment>
+</jboss-deployment-structure>

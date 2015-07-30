@@ -76,17 +76,10 @@ public interface ProductQuantity extends Serializable {
 	List<ProductImage> getProductImages();
 
 	/**
-	 * Returns all the small size images of the product for this SKU.
+	 * Sets all the images of the product for this SKU.
 	 * 
-	 * @return
+	 * @param productImages
 	 */
-	List<ProductImage> getProductSmallImages();
-
-	/**
-	 * Returns all the medium size images of the product for this SKU.
-	 * 
-	 * @return
-	 */
-	List<ProductImage> getProductMediumImages();
+	void setProductImages(List<ProductImage> productImages);
 
 }

@@ -124,8 +124,6 @@ public class ProductAttributeImpl implements ProductAttribute {
 		builder.append(option);
 		builder.append(", value=");
 		builder.append(value);
-		builder.append(", productsQuantities=");
-		builder.append(productsQuantities);
 		builder.append("]");
 		return builder.toString();
 	}

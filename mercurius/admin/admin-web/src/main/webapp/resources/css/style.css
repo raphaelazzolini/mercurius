@@ -1,0 +1,132 @@
+legend {
+	width: inherit;
+	font-size: inherit;
+}
+
+.headerPanel .ui-panel-content {
+	padding: 0;
+}
+
+.ui-inputfield {
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+.ui-outputlabel {
+	margin-right: 10px;
+	margin-bottom: 15px;
+}
+
+.ui-button {
+	margin-right: 10px;
+}
+
+.ui-selectonemenu {
+	width: 175px !important;
+}
+
+.ui-selectonemenu-label {
+	width: 165px !important;
+	margin-bottom: 1px;
+	overflow: inherit !important;
+}
+
+.ui-selectonemenu-trigger {
+	width: 24px !important;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	border-width: 0px;
+	border-style: hidden;
+	border-color: inherit;
+	padding: 4px 10px;
+	background-color: inherit;
+}
+
+.ui-panelgrid tr, .ui-panelgrid tr td {
+	  background: transparent url("../images/transparent.png") 50% top repeat-x;
+}
+
+.ui-paginator-bottom, .ui-picklist, .ui-fileupload {
+	margin-bottom: 10px;
+}
+
+.ui-datagrid-data {
+	background-color: inherit;
+}
+
+.ui-datagrid-content {
+	border-width: 0px;
+	border-style: hidden;
+	border-color: inherit;
+}
+
+.ui-picklist-list {
+	width: 100% !important;
+}
+
+.ui-breadcrumb-chevron {
+	margin-top: 5px;
+}
+
+.ui-galleria, .ui-galleria-panel-wrapper, .ui-galleria-panel {
+	max-width: 100%;
+}
+
+.ui-galleria-panel-wrapper img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+.search-paginator {
+	border: none;
+}
+
+@media ( min-width : 768px) {
+	.mobile-menu {
+		display: none !important;
+	}
+	.navbar {
+		position: relative;
+		min-height: 0px;
+		margin-bottom: 0px;
+		-moz-border-radius: 6px;
+		-webkit-border-radius: 6px;
+		border-radius: 6px;
+	}
+	.navbar-collapse {
+		padding-right: 0;
+		padding-left: 0;
+	}
+	.navbar-nav>li>a {
+		padding: 6.160px 4.620px;
+	}
+	.menu-link {
+		margin-right: 10px;
+	}
+}
+
+@media ( max-width : 768px) {
+	.main-menu-bar {
+		min-height: 35px;
+		margin-bottom: 0;
+	}
+	.main-menu {
+		display: none;
+	}
+	.banner {
+		display: none;
+	}
+	.search-bar {
+		margin: -8px -15px;
+	}
+	.search-bar li input {
+		margin-right: 0px;
+		margin-bottom: 0px;
+		width: 100%
+	}
+	.search-bar li button {
+		display: none;
+	}
+}

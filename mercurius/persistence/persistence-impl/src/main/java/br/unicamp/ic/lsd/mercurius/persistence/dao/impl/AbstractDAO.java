@@ -23,7 +23,7 @@ public abstract class AbstractDAO<T extends Serializable, ID extends Serializabl
 
 	private static final long serialVersionUID = 2154109715030701386L;
 
-	@PersistenceContext(unitName = "submarinoPU")
+	@PersistenceContext(unitName = "mercuriusPU")
 	private EntityManager em;
 
 	protected AbstractDAO() {
@@ -55,14 +55,7 @@ public abstract class AbstractDAO<T extends Serializable, ID extends Serializabl
 
 	protected List<T> findByCriteria(CriteriaQuery<T> cq) {
 
-		if (cq == null) {
-			cq = createCriteriaQuery(createCriteriaBuilder());
-
-			final Root<T> root = createRoot(cq);
-			cq.select(root);
-		}
-
-		final TypedQuery<T> type = getEntityManager().createQuery(cq);
+		TypedQuery<T> type = createTypedQueryFromCriteria(cq);
 		return type.getResultList();
 	}
 
@@ -74,6 +67,14 @@ public abstract class AbstractDAO<T extends Serializable, ID extends Serializabl
 	@Override
 	public List<T> getAll() {
 		return findByCriteria(null);
+	}
+
+	@Override
+	public List<T> getAll(int offset, int maxResults) {
+		TypedQuery<T> typedQuery = createTypedQueryFromCriteria(null);
+		typedQuery.setFirstResult(offset);
+		typedQuery.setMaxResults(maxResults);
+		return typedQuery.getResultList();
 	}
 
 	protected T getSingleResult(final CriteriaQuery<? extends T> cq) {
@@ -170,5 +171,17 @@ public abstract class AbstractDAO<T extends Serializable, ID extends Serializabl
 	}
 
 	protected abstract Class<? extends T> getEntityClass();
+
+	private TypedQuery<T> createTypedQueryFromCriteria(CriteriaQuery<T> cq) {
+		if (cq == null) {
+			cq = createCriteriaQuery(createCriteriaBuilder());
+
+			final Root<T> root = createRoot(cq);
+			cq.select(root);
+		}
+
+		TypedQuery<T> type = getEntityManager().createQuery(cq);
+		return type;
+	}
 
 }

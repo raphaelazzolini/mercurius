@@ -15,8 +15,7 @@ class CategoryMgtImpl {
 	}
 
 	public List<Category> getCategoryTree() {
-		List<Category> mainCategories = manager.getCategoryDAO()
-				.getMainCategories();
+		List<Category> mainCategories = manager.getCategoryDAO().getMainCategories();
 
 		for (Category category : mainCategories) {
 			manager.getCategoryDAO().loadSubCategories(category);

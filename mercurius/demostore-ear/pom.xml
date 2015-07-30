@@ -27,6 +27,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+			<artifactId>admin-web</artifactId>
+			<type>war</type>
+		</dependency>
+
+		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 		</dependency>
@@ -59,6 +65,12 @@
 							<groupId>br.unicamp.ic.lsd.mercurius</groupId>
 							<artifactId>demostore-web</artifactId>
 							<contextRoot>/demostore</contextRoot>
+						</webModule>
+
+						<webModule>
+							<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+							<artifactId>admin-web</artifactId>
+							<contextRoot>/admin</contextRoot>
 						</webModule>
 
 						<ejbModule>

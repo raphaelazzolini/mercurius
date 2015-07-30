@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -50,8 +49,8 @@ public class ProductQuantityImpl implements ProductQuantity {
 			referencedColumnName = "product_attribute_id"))
 	private List<ProductAttribute> productsAttributes;
 
-	@OneToMany(mappedBy = "productQuantity", cascade = CascadeType.ALL, targetEntity = ProductImageImpl.class)
-	private List<ProductImage> productImages;
+	@OneToMany(mappedBy = "productQuantity", targetEntity = ProductImageImpl.class)
+	private List<ProductImage> productImages = new ArrayList<ProductImage>();
 
 	@Transient
 	private BigDecimal itemPrice;
@@ -101,6 +100,7 @@ public class ProductQuantityImpl implements ProductQuantity {
 		return productImages;
 	}
 
+	@Override
 	public void setProductImages(List<ProductImage> productImages) {
 		this.productImages = productImages;
 	}
@@ -145,34 +145,8 @@ public class ProductQuantityImpl implements ProductQuantity {
 		builder.append(product);
 		builder.append(", quantity=");
 		builder.append(quantity);
-		builder.append(", productsAttributes=");
-		builder.append(productsAttributes);
-		builder.append(", productImages=");
-		builder.append(productImages);
 		builder.append("]");
 		return builder.toString();
-	}
-
-	@Override
-	public List<ProductImage> getProductSmallImages() {
-		List<ProductImage> smallImages = new ArrayList<>();
-		for (ProductImage image : productImages) {
-			if (image.getImageType().equals("SMALL")) {
-				smallImages.add(image);
-			}
-		}
-		return smallImages;
-	}
-
-	@Override
-	public List<ProductImage> getProductMediumImages() {
-		List<ProductImage> smallImages = new ArrayList<>();
-		for (ProductImage image : productImages) {
-			if (image.getImageType().equals("MEDIUM")) {
-				smallImages.add(image);
-			}
-		}
-		return smallImages;
 	}
 
 }

@@ -149,10 +149,6 @@ public class CategoryImpl implements Category {
 		builder.append(description);
 		builder.append(", parent=");
 		builder.append(parent);
-		builder.append(", children=");
-		builder.append(children);
-		builder.append(", products=");
-		builder.append(products);
 		builder.append("]");
 		return builder.toString();
 	}

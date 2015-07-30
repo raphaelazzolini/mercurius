@@ -1,5 +1,6 @@
 package br.unicamp.ic.lsd.mercurius.categorymgr.spec.prov;
 
+import java.util.Collection;
 import java.util.List;
 
 import br.unicamp.ic.lsd.mercurius.datatype.Category;
@@ -55,5 +56,21 @@ public interface CategoryMgt {
 	 * @return the saved {@link Category}
 	 */
 	Category saveCategory(Category category);
+
+	/**
+	 * Returns all categories from database
+	 * 
+	 * @param product
+	 * @return
+	 */
+	List<Category> getAllCategories();
+
+	/**
+	 * Returns a list of categories by their id
+	 * 
+	 * @param id
+	 * @return
+	 */
+	List<Category> getCategoriesByIds(Collection<Integer> ids);
 
 }

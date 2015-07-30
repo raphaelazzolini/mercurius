@@ -3,7 +3,6 @@ package br.unicamp.ic.lsd.mercurius.persistence.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -46,8 +45,8 @@ public class ManufacturerImpl implements Manufacturer {
 	@Column(name = "manufacturer_url")
 	private String url;
 
-	@OneToMany(mappedBy = "manufacturer", cascade = CascadeType.ALL)
-	private List<ProductImpl> products;
+	@OneToMany(mappedBy = "manufacturer", targetEntity = ProductImpl.class)
+	private List<Product> products;
 
 	@Override
 	public Integer getId() {
@@ -85,7 +84,8 @@ public class ManufacturerImpl implements Manufacturer {
 		return productsList;
 	}
 
-	public void setProducts(List<ProductImpl> products) {
+	@Override
+	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
 
@@ -112,8 +112,6 @@ public class ManufacturerImpl implements Manufacturer {
 		builder.append(name);
 		builder.append(", url=");
 		builder.append(url);
-		builder.append(", products=");
-		builder.append(products);
 		builder.append("]");
 		return builder.toString();
 	}

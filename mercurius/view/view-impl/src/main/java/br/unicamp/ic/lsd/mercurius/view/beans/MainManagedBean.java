@@ -19,7 +19,7 @@ public class MainManagedBean implements Serializable {
 	private static final long serialVersionUID = -7703449526113353913L;
 
 	private String urlPath;
-	private String staticPath;
+	private String imagesPath;
 
 	@EJB
 	private ConfigurationDAO configurationDAO;
@@ -27,15 +27,15 @@ public class MainManagedBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		Configuration urlConfiguration = configurationDAO.findById("urlPath");
-		Configuration staticUrlConfiguration = configurationDAO.findById("staticPath");
+		Configuration imagesPathConfiguration = configurationDAO.findById("imagesPath");
 		urlPath = StringUtils.EMPTY;
-		staticPath = StringUtils.EMPTY;
+		imagesPath = StringUtils.EMPTY;
 
 		if (urlConfiguration != null) {
 			urlPath = urlConfiguration.getValue();
 		}
-		if (staticUrlConfiguration != null) {
-			staticPath = staticUrlConfiguration.getValue();
+		if (imagesPathConfiguration != null) {
+			imagesPath = imagesPathConfiguration.getValue();
 		}
 	}
 
@@ -47,12 +47,12 @@ public class MainManagedBean implements Serializable {
 		this.urlPath = urlPath;
 	}
 
-	public String getStaticPath() {
-		return staticPath;
+	public String getImagesPath() {
+		return imagesPath;
 	}
 
-	public void setStaticPath(String staticPath) {
-		this.staticPath = staticPath;
+	public void setImagesPath(String imagesPath) {
+		this.imagesPath = imagesPath;
 	}
 
 }

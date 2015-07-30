@@ -29,9 +29,6 @@ public class ProductImageImpl implements ProductImage {
 	@Column(name = "product_image_id")
 	private Integer id;
 
-	@Column(name = "image_type", nullable = false)
-	private String imageType;
-
 	@Column(name = "image_path", nullable = false)
 	private String imagePath;
 
@@ -46,16 +43,6 @@ public class ProductImageImpl implements ProductImage {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	@Override
-	public String getImageType() {
-		return imageType;
-	}
-
-	@Override
-	public void setImageType(String imageType) {
-		this.imageType = imageType;
 	}
 
 	@Override
@@ -97,12 +84,8 @@ public class ProductImageImpl implements ProductImage {
 		StringBuilder builder = new StringBuilder();
 		builder.append("ProductImageImpl [id=");
 		builder.append(id);
-		builder.append(", imageType=");
-		builder.append(imageType);
 		builder.append(", imagePath=");
 		builder.append(imagePath);
-		builder.append(", productQuantity=");
-		builder.append(productQuantity);
 		builder.append("]");
 		return builder.toString();
 	}

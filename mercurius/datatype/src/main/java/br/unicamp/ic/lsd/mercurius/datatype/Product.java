@@ -197,6 +197,13 @@ public interface Product extends Serializable {
 	List<ProductQuantity> getQuantities();
 
 	/**
+	 * Sets the SKUs of the product.
+	 * 
+	 * @param quantities
+	 */
+	void setQuantities(List<ProductQuantity> quantities);
+
+	/**
 	 * Returns the manufacturer of the product.
 	 * 
 	 * @return
