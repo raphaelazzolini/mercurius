@@ -22,4 +22,6 @@ public interface ProductDAO extends DAO<Product, Integer> {
 
 	Long getProductCount();
 
+	void indexProductSearch();
+
 }

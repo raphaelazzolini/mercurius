@@ -14,7 +14,7 @@
 			<p:dataTable var="item" value="#{basketManagedBean.basketItems}">
 				<p:column>
 					<a href="produto?prodId=#{product.id}" title="#{product.name}" class="url">
-						<p:graphicImage value="#{mainManagedBean.staticPath}#{item.product.mainImage}" />
+						<p:graphicImage value="#{mainManagedBean.imagesPath}small/#{item.product.mainImage}" />
 					</a>
 				</p:column>
 

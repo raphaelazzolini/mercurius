@@ -97,16 +97,6 @@ public class ProductDAOImpl extends AbstractDAO<Product, Integer> implements Pro
 		Product productEntity = newInstance();
 		FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(em);
 
-		/*
-		 * Purge and load the products in the index
-		 */
-		try {
-			fullTextEntityManager.purgeAll(ProductImpl.class);
-			fullTextEntityManager.createIndexer().startAndWait();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
 		QueryBuilder qb = fullTextEntityManager.getSearchFactory().buildQueryBuilder()
 				.forEntity(productEntity.getClass()).get();
 		if (!Strings.isNullOrEmpty(text)) {
@@ -149,6 +139,13 @@ public class ProductDAOImpl extends AbstractDAO<Product, Integer> implements Pro
 	public Long getProductCount() {
 		TypedQuery<Long> query = em.createQuery("select count(p.id) from Product p", Long.class);
 		return query.getSingleResult();
+	}
+
+	@Override
+	public void indexProductSearch() {
+		FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(em);
+		fullTextEntityManager.purgeAll(ProductImpl.class);
+		fullTextEntityManager.createIndexer().start();
 	}
 
 }

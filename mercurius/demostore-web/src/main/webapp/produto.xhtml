@@ -18,8 +18,8 @@
 			<h6><h:outputText value="(#{messages['product.sku']} #{productManagedBean.selectedProductQuantity.sku})"/></h6>
 
 			<p:panelGrid columns="2" styleClass="gridWithoutBorder">
-				<p:galleria value="#{productManagedBean.selectedProductQuantity.productMediumImages}" var="image" panelWidth="500" panelHeight="500">
-				    <p:graphicImage value="#{mainManagedBean.staticPath}#{image.imagePath}" alt="#{productManagedBean.product.name} - #{productManagedBean.product.manufacturer.name}" />
+				<p:galleria value="#{productManagedBean.selectedProductQuantity.productImages}" var="image" panelWidth="500" panelHeight="500">
+				    <p:graphicImage value="#{mainManagedBean.imagesPath}medium/#{image.imagePath}" alt="#{productManagedBean.product.name} - #{productManagedBean.product.manufacturer.name}" />
 				</p:galleria>
 
 				<p:panel>

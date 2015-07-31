@@ -26,7 +26,6 @@ import javax.persistence.Transient;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.solr.analysis.ASCIIFoldingFilterFactory;
-import org.apache.solr.analysis.BrazilianStemFilterFactory;
 import org.apache.solr.analysis.LowerCaseFilterFactory;
 import org.apache.solr.analysis.StandardTokenizerFactory;
 import org.hibernate.search.annotations.Analyze;
@@ -52,8 +51,7 @@ import com.google.common.base.Objects;
 @Indexed
 @AnalyzerDef(name = "productalyzer", tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class), filters = {
 		@TokenFilterDef(factory = LowerCaseFilterFactory.class),
-		@TokenFilterDef(factory = ASCIIFoldingFilterFactory.class),
-		@TokenFilterDef(factory = BrazilianStemFilterFactory.class) })
+		@TokenFilterDef(factory = ASCIIFoldingFilterFactory.class) })
 @Table(name = "product")
 public class ProductImpl implements Product {
 

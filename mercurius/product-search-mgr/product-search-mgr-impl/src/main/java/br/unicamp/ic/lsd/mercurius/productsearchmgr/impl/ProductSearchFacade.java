@@ -41,4 +41,9 @@ class ProductSearchFacade implements ProductSearchMgt {
 		return null;
 	}
 
+	@Override
+	public void indexSearch() {
+		manager.getProductDAO().indexProductSearch();
+	}
+
 }

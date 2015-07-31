@@ -38,4 +38,9 @@ public interface ProductSearchMgt {
 	 */
 	List<Product> searchByLasCategoriesSeen();
 
+	/**
+	 * Indexes the products to the search
+	 */
+	void indexSearch();
+
 }

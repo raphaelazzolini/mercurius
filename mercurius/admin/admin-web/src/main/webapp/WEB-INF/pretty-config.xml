@@ -13,4 +13,9 @@
 		<view-id value="/produtos.xhtml" />
 	</url-mapping>
 
+	<url-mapping id="indexSearch">
+		<pattern value="/indexSearch" />
+		<view-id value="/indexSearch.xhtml" />
+	</url-mapping>
+
 </pretty-config>

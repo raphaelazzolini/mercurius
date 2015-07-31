@@ -33,5 +33,10 @@
 			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
 			<artifactId>admin-product-connector</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+			<artifactId>admin-product-search-connector</artifactId>
+		</dependency>
 	</dependencies>
 </project>

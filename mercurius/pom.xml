@@ -373,6 +373,12 @@
 				<version>${project.version}</version>
 			</dependency>
 
+			<dependency>
+				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+				<artifactId>admin-product-search-connector</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
 			<!-- IMPL -->
 			<dependency>
 				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
@@ -525,7 +531,6 @@
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-search</artifactId>
 				<version>${hibernate.search.version}</version>
-				<scope>provided</scope>
 			</dependency>
 
 			<dependency>
