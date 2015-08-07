@@ -43,7 +43,7 @@
 
 		<dependency>
 			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-			<artifactId>customer-security-connector</artifactId>
+			<artifactId>security-mgr-impl</artifactId>
 		</dependency>
 
 		<dependency>
@@ -106,7 +106,7 @@
 					<aspectLibraries>
 						<aspectLibrary>
 							<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-							<artifactId>customer-security-connector</artifactId>
+							<artifactId>security-mgr-impl</artifactId>
 						</aspectLibrary>
 					</aspectLibraries>
 				</configuration>
