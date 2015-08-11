@@ -12,6 +12,7 @@ import br.unicamp.ic.lsd.mercurius.datatype.ProductImage;
 import br.unicamp.ic.lsd.mercurius.datatype.ProductQuantity;
 import br.unicamp.ic.lsd.mercurius.productmgr.spec.prov.ProductManager;
 import br.unicamp.ic.lsd.mercurius.productmgr.spec.prov.ProductMgt;
+import br.unicamp.ic.lsd.mercurius.productmgr.spec.req.ProductPromotionMgt;
 
 class ProductFacade implements ProductMgt {
 
@@ -26,12 +27,16 @@ class ProductFacade implements ProductMgt {
 
 	@Override
 	public Product getProduct(Integer productId) {
-		return productMgt.getProductById(productId);
+		ProductPromotionMgt promotionMgt = (ProductPromotionMgt) manager.getRequiredInterface("ProductPromotionMgt");
+		Product product = productMgt.getProductById(productId);
+		return promotionMgt.getProductWithPromotion(product);
 	}
 
 	@Override
 	public Product loadCategories(Product product) {
-		return productMgt.loadCategories(product);
+		ProductPromotionMgt promotionMgt = (ProductPromotionMgt) manager.getRequiredInterface("ProductPromotionMgt");
+		product = productMgt.loadCategories(product);
+		return promotionMgt.getProductWithPromotion(product);
 	}
 
 	@Override

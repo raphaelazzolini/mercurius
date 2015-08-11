@@ -147,10 +147,19 @@ class OrderMgtImpl {
 	private List<OrderTotal> getOrderTotals(Order order, Set<OrderProduct> orderProducts, Customer customer) {
 		List<OrderTotal> orderTotals = new ArrayList<OrderTotal>();
 		BigDecimal productsTotal = BigDecimal.ZERO;
+		BigDecimal productsDiscountTotal = BigDecimal.ZERO;
 		BigDecimal totalValue = BigDecimal.ZERO;
 		for (OrderProduct orderProduct : orderProducts) {
 			BigDecimal price = orderProduct.getPrice();
-			productsTotal = productsTotal.add(price);
+			BigDecimal specialPrice = orderProduct.getSpecialPrice();
+			if (specialPrice != null
+					&& specialPrice.compareTo(BigDecimal.ZERO) > 0) {
+				productsTotal = productsTotal.add(specialPrice);
+				productsDiscountTotal = productsDiscountTotal.subtract(price
+						.subtract(specialPrice));
+			} else {
+				productsTotal = productsTotal.add(price);
+			}
 			totalValue = totalValue.add(price);
 		}
 
@@ -159,8 +168,19 @@ class OrderMgtImpl {
 		orderProductsTotal.setValue(productsTotal);
 		orderTotals.add(orderProductsTotal);
 
+		if (productsDiscountTotal.compareTo(BigDecimal.ZERO) > 0) {
+			OrderTotal orderDiscountsTotal = manager.getOrderTotalFactory()
+					.createInstance();
+			orderDiscountsTotal.setModule(OrderTotalModule.DISCOUNT);
+			orderDiscountsTotal.setValue(productsDiscountTotal);
+			orderDiscountsTotal.setTitle(PRODUCTS_DISCOUNT);
+			orderTotals.add(orderDiscountsTotal);
+		}
+
 		for (OrderTotal orderTotal : orderTotals) {
-			if (orderTotal.getModule().equals(OrderTotalModule.SHIPPING_TOTAL)) {
+			if (orderTotal.getModule().equals(OrderTotalModule.DISCOUNT)
+					|| orderTotal.getModule().equals(
+							OrderTotalModule.SHIPPING_TOTAL)) {
 				totalValue = totalValue.add(orderTotal.getValue());
 			}
 		}

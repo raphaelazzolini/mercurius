@@ -7,6 +7,8 @@ import javax.naming.NamingException;
 import br.unicamp.ic.lsd.mercurius.addressmgr.impl.AddressMgrComponentFactory;
 import br.unicamp.ic.lsd.mercurius.customermgr.spec.prov.CustomerManager;
 import br.unicamp.ic.lsd.mercurius.customermgr.spec.prov.CustomerMgt;
+import br.unicamp.ic.lsd.mercurius.customermgr.spec.req.CustomerSecurityMgt;
+import br.unicamp.ic.lsd.mercurius.customersecurityconnector.CustomerSecurityConnectorComponentFactory;
 import br.unicamp.ic.lsd.mercurius.persistence.dao.CustomerDAO;
 import br.unicamp.ic.sed.cosmos.AManagerComposite;
 import br.unicamp.ic.sed.cosmos.IManager;
@@ -25,6 +27,11 @@ class Manager extends AManagerComposite implements CustomerManager {
 			Context context = new InitialContext();
 			customerDAO = (CustomerDAO) context.lookup("java:app/persistence/customerDAO");
 			setInternalComponent(ADDRESS_MGR, AddressMgrComponentFactory.createInstance());
+
+			setRequiredInterfaceType("CustomerSecurityMgt", CustomerSecurityMgt.class);
+			IManager manager = CustomerSecurityConnectorComponentFactory.createInstance();
+			setRequiredInterface("CustomerSecurityMgt", manager.getProvidedInterface("CustomerSecurityMgt"));
+
 			setProvidedInterfaceType(I_MANAGER, IManager.class);
 			setProvidedInterface(I_MANAGER, this);
 			setProvidedInterfaceType(CUSTOMER_MGT, CustomerMgt.class);

@@ -43,12 +43,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-			<optional>true</optional>
-		</dependency>
-
-		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
@@ -92,21 +86,4 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>aspectj-maven-plugin</artifactId>
-				<configuration>
-					<aspectLibraries>
-						<aspectLibrary>
-							<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-							<artifactId>basket-logging-connector</artifactId>
-						</aspectLibrary>
-					</aspectLibraries>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 </project>

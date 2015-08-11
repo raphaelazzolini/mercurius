@@ -7,6 +7,7 @@ import javax.naming.NamingException;
 import br.unicamp.ic.lsd.mercurius.datatype.factory.OrderProductFactory;
 import br.unicamp.ic.lsd.mercurius.datatype.factory.OrderTotalFactory;
 import br.unicamp.ic.lsd.mercurius.orderbasketconnector.BasketConnectorComponentFactory;
+import br.unicamp.ic.lsd.mercurius.orderloggingconnector.OrderLoggingConnectorComponentFactory;
 import br.unicamp.ic.lsd.mercurius.ordermgr.spec.prov.OrderManager;
 import br.unicamp.ic.lsd.mercurius.ordermgr.spec.prov.OrderMgt;
 import br.unicamp.ic.lsd.mercurius.ordermgr.spec.req.OrderBasketMgt;
@@ -15,6 +16,7 @@ import br.unicamp.ic.lsd.mercurius.ordermgr.spec.req.OrderPromotionMgt;
 import br.unicamp.ic.lsd.mercurius.ordermgr.spec.req.PaymentMgt;
 import br.unicamp.ic.lsd.mercurius.ordermgr.spec.req.ShippingMgt;
 import br.unicamp.ic.lsd.mercurius.orderpaymentconnector.PaymentConnectorComponentFactory;
+import br.unicamp.ic.lsd.mercurius.orderpromotionconnector.OrderPromotionComponentFactory;
 import br.unicamp.ic.lsd.mercurius.persistence.dao.OrderDAO;
 import br.unicamp.ic.lsd.mercurius.persistence.dao.OrderProductDAO;
 import br.unicamp.ic.lsd.mercurius.persistence.dao.OrderStatusDAO;
@@ -62,6 +64,10 @@ class Manager extends AManager implements OrderManager {
 			setProvidedInterfaceType(ORDER_MGT, OrderMgt.class);
 			setProvidedInterfaceType(I_MANAGER, IManager.class);
 
+			IManager promotionManager = OrderPromotionComponentFactory.createInstance();
+			setRequiredInterfaceType("OrderPromotionMgt", OrderPromotionMgt.class);
+			setRequiredInterface("OrderPromotionMgt", promotionManager.getProvidedInterface("OrderPromotionMgt"));
+
 			setRequiredInterfaceType(ORDER_BASKET_MGT, OrderBasketMgt.class);
 			setRequiredInterfaceType(ORDER_PRODUCT_MGT, OrderProductMgt.class);
 			setRequiredInterfaceType(PAYMENT_MGT, PaymentMgt.class);
@@ -73,6 +79,9 @@ class Manager extends AManager implements OrderManager {
 
 			IManager paymentConnectorManager = PaymentConnectorComponentFactory.createInstance();
 			setRequiredInterface(PAYMENT_MGT, paymentConnectorManager.getProvidedInterface(PAYMENT_MGT));
+
+			IManager loggingManager = OrderLoggingConnectorComponentFactory.createInstance();
+			setRequiredInterface("OrderLoggingMgt", loggingManager.getProvidedInterface("OrderLoggingMgt"));
 
 			IManager orderProductManager = ProductConnectorComponentFactory.createInstance();
 			setRequiredInterface(ORDER_PRODUCT_MGT, orderProductManager.getProvidedInterface(ORDER_PRODUCT_MGT));

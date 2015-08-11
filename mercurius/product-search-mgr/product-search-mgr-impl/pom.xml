@@ -56,18 +56,12 @@
 
 		<dependency>
 			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-			<artifactId>promotion-mgr</artifactId>
+			<artifactId>promotion-mgr-spec</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-			<artifactId>logging-mgr</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-			<optional>true</optional>
+			<artifactId>logging-mgr-spec</artifactId>
 		</dependency>
 
 		<dependency>
@@ -126,25 +120,4 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>aspectj-maven-plugin</artifactId>
-				<configuration>
-					<aspectLibraries>
-						<aspectLibrary>
-							<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-							<artifactId>product-search-logging-connector</artifactId>
-						</aspectLibrary>
-						<aspectLibrary>
-							<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-							<artifactId>product-search-promotion-connector</artifactId>
-						</aspectLibrary>
-					</aspectLibraries>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 </project>

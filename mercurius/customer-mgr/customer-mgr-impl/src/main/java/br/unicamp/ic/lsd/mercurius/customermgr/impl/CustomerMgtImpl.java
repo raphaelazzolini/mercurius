@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.commons.collections4.CollectionUtils;
 
 import br.unicamp.ic.lsd.mercurius.customermgr.spec.prov.CustomerManager;
+import br.unicamp.ic.lsd.mercurius.customermgr.spec.req.CustomerSecurityMgt;
 import br.unicamp.ic.lsd.mercurius.datatype.Address;
 import br.unicamp.ic.lsd.mercurius.datatype.Customer;
 import br.unicamp.ic.lsd.mercurius.excpetionhandler.exceptions.DuplicatedDocumentException;
@@ -43,6 +44,9 @@ class CustomerMgtImpl {
 			throw new DuplicatedDocumentException();
 		}
 
+		CustomerSecurityMgt securityMgt = (CustomerSecurityMgt) this.manager
+				.getRequiredInterface("CustomerSecurityMgt");
+		customer.setPassword(securityMgt.encryptPassword(customer.getPassword()));
 		return customerDAO.merge(customer);
 	}
 
@@ -55,6 +59,9 @@ class CustomerMgtImpl {
 	}
 
 	Customer login(String email, String password) {
+		CustomerSecurityMgt securityMgt = (CustomerSecurityMgt) this.manager
+				.getRequiredInterface("CustomerSecurityMgt");
+		password = securityMgt.encryptPassword(password);
 		return customerDAO.getCustomer(email, password);
 	}
 

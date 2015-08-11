@@ -25,22 +25,12 @@
 
 		<dependency>
 			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-			<artifactId>promotion-mgr</artifactId>
+			<artifactId>promotion-mgr-spec</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-			<optional>true</optional>
+			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+			<artifactId>promotion-mgr-impl</artifactId>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>aspectj-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
 </project>

@@ -25,7 +25,6 @@
 		<module>security-mgr</module>
 		<module>promotion-mgr</module>
 		<module>cache-mgr</module>
-		<module>exception-handler</module>
 		<module>view</module>
 		<module>demostore-web</module>
 		<module>demostore-ear</module>
@@ -38,7 +37,6 @@
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<java.version>1.7</java.version>
 		<maven.version>3.1.1</maven.version>
-		<aspectj.version>1.8.1</aspectj.version>
 		<hibernate.version>4.3.5.Final</hibernate.version>
 		<hibernate.search.version>4.5.1.Final</hibernate.search.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -112,27 +110,6 @@
 
 		<pluginManagement>
 			<plugins>
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>aspectj-maven-plugin</artifactId>
-					<version>1.6</version>
-					<configuration>
-						<complianceLevel>${java.version}</complianceLevel>
-						<source>${java.version}</source>
-						<target>${java.version}</target>
-						<showWeaveInfo>true</showWeaveInfo>
-					</configuration>
-					<executions>
-						<execution>
-							<phase>process-sources</phase>
-							<goals>
-								<goal>compile</goal>
-								<goal>test-compile</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-ejb-plugin</artifactId>
@@ -218,7 +195,7 @@
 
 			<dependency>
 				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-				<artifactId>logging-mgr</artifactId>
+				<artifactId>logging-mgr-spec</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
@@ -249,6 +226,18 @@
 			<dependency>
 				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
 				<artifactId>creditcard-mgr-spec</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+				<artifactId>promotion-mgr-spec</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+				<artifactId>cache-mgr-spec</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
@@ -304,12 +293,6 @@
 			<dependency>
 				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
 				<artifactId>customer-security-connector</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-				<artifactId>view-exception-handler-connector</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
@@ -424,6 +407,12 @@
 
 			<dependency>
 				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+				<artifactId>logging-mgr-impl</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
 				<artifactId>order-mgr-impl</artifactId>
 				<version>${project.version}</version>
 			</dependency>
@@ -454,19 +443,13 @@
 
 			<dependency>
 				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-				<artifactId>exception-handler</artifactId>
+				<artifactId>promotion-mgr-impl</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-				<artifactId>promotion-mgr</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-				<artifactId>cache-mgr</artifactId>
+				<artifactId>cache-mgr-impl</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
@@ -552,13 +535,6 @@
 				<artifactId>hsqldb</artifactId>
 				<version>2.3.2</version>
 				<scope>test</scope>
-			</dependency>
-
-			<dependency>
-				<groupId>org.aspectj</groupId>
-				<artifactId>aspectjrt</artifactId>
-				<version>${aspectj.version}</version>
-				<scope>compile</scope>
 			</dependency>
 
 			<dependency>

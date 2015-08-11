@@ -24,7 +24,6 @@
 		<module>product-search-logging-connector</module>
 		<module>order-logging-connector</module>
 		<module>customer-security-connector</module>
-		<module>view-exception-handler-connector</module>
 		<module>order-promotion-connector</module>
 		<module>product-search-promotion-connector</module>
 		<module>persistence-cache-connector</module>

@@ -12,6 +12,8 @@ import br.unicamp.ic.lsd.mercurius.datatype.Customer;
 import br.unicamp.ic.lsd.mercurius.datatype.Promotion;
 import br.unicamp.ic.lsd.mercurius.datatype.factory.PromotionFactory;
 import br.unicamp.ic.lsd.mercurius.persistence.dao.PromotionDAO;
+import br.unicamp.ic.lsd.mercurius.persistence.spec.req.PersistenceCacheMgt;
+import br.unicamp.ic.lsd.mercurius.persistencecacheconnector.CacheConnectorComponentFactory;
 
 @Stateless(name = "promotionDiscountDAO")
 @Local(PromotionDAO.class)
@@ -31,11 +33,23 @@ public class PromotionDiscountDAO extends AbstractDAO<Promotion, Integer> implem
 
 	@Override
 	public List<Promotion> getPromotions(Customer customer) {
-		Date today = new Date();
-		TypedQuery<Promotion> query = getEntityManager().createQuery(
-				"from PromotionDiscount where startDate <= :today and endDate >= :today", Promotion.class);
-		query.setParameter("today", today);
-		return query.getResultList();
+		PersistenceCacheMgt cacheMgt = (PersistenceCacheMgt) CacheConnectorComponentFactory.createInstance()
+				.getProvidedInterface("PersistenceCacheMgt");
+		List<Promotion> promotions = null;
+		if (cacheMgt != null) {
+			promotions = cacheMgt.getFromPromotionCache(customer);
+		}
+		if (promotions == null) {
+			Date today = new Date();
+			TypedQuery<Promotion> query = getEntityManager().createQuery(
+					"from PromotionDiscount where startDate <= :today and endDate >= :today", Promotion.class);
+			query.setParameter("today", today);
+			promotions = query.getResultList();
+		}
+		if (cacheMgt != null) {
+			cacheMgt.putOnPromotionCache(customer, promotions);
+		}
+		return promotions;
 	}
 
 	@Override

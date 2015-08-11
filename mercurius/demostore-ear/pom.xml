@@ -31,11 +31,6 @@
 			<artifactId>admin-web</artifactId>
 			<type>war</type>
 		</dependency>
-
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-		</dependency>
 	</dependencies>
 
 	<build>

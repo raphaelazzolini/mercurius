@@ -10,6 +10,8 @@ import br.unicamp.ic.lsd.mercurius.datatype.ProductQuantity;
 import br.unicamp.ic.lsd.mercurius.datatype.factory.ProductQuantityFactory;
 import br.unicamp.ic.lsd.mercurius.persistence.dao.ProductImageDAO;
 import br.unicamp.ic.lsd.mercurius.persistence.dao.ProductQuantityDAO;
+import br.unicamp.ic.lsd.mercurius.persistence.spec.req.PersistenceCacheMgt;
+import br.unicamp.ic.lsd.mercurius.persistencecacheconnector.CacheConnectorComponentFactory;
 
 @Stateless(name = "productQuantityDAO")
 @Local(ProductQuantityDAO.class)
@@ -41,10 +43,21 @@ public class ProductQuantityDAOImpl extends AbstractDAO<ProductQuantity, String>
 
 	@Override
 	public ProductQuantity loadAttributes(ProductQuantity productQuantity) {
-		productQuantity = findById(productQuantity.getSku());
-		Hibernate.initialize(productQuantity.getProductsAttributes());
-		Hibernate.initialize(productQuantity.getProductImages());
-		return productQuantity;
+		PersistenceCacheMgt cacheMgt = (PersistenceCacheMgt) CacheConnectorComponentFactory.createInstance()
+				.getProvidedInterface("PersistenceCacheMgt");
+		ProductQuantity cachedValue = null;
+		if (cacheMgt != null) {
+			cachedValue = cacheMgt.getFromQuantityCache(productQuantity);
+		}
+		if (cachedValue == null) {
+			cachedValue = findById(productQuantity.getSku());
+			Hibernate.initialize(cachedValue.getProductsAttributes());
+			Hibernate.initialize(cachedValue.getProductImages());
+		}
+		if (cacheMgt != null) {
+			cacheMgt.putOnQuantityCache(productQuantity, cachedValue);
+		}
+		return cachedValue;
 	}
 
 }

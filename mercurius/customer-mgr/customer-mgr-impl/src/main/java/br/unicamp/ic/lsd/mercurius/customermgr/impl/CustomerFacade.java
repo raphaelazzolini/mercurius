@@ -3,6 +3,7 @@ package br.unicamp.ic.lsd.mercurius.customermgr.impl;
 import br.unicamp.ic.lsd.mercurius.addressmgr.spec.prov.AddressMgt;
 import br.unicamp.ic.lsd.mercurius.customermgr.spec.prov.CustomerManager;
 import br.unicamp.ic.lsd.mercurius.customermgr.spec.prov.CustomerMgt;
+import br.unicamp.ic.lsd.mercurius.customermgr.spec.req.CustomerSecurityMgt;
 import br.unicamp.ic.lsd.mercurius.datatype.Address;
 import br.unicamp.ic.lsd.mercurius.datatype.Customer;
 import br.unicamp.ic.lsd.mercurius.excpetionhandler.exceptions.DuplicatedDocumentException;
@@ -99,6 +100,9 @@ public class CustomerFacade implements CustomerMgt {
 	public Customer changePassword(Customer customer, String oldPassword, String newPassword) {
 		customer = customerMgtImpl.login(customer.getEmailAddress(), oldPassword);
 		if (customer != null) {
+			CustomerSecurityMgt securityMgt = (CustomerSecurityMgt) this.manager
+					.getRequiredInterface("CustomerSecurityMgt");
+			newPassword = securityMgt.encryptPassword(newPassword);
 			customer.setPassword(newPassword);
 			return customerMgtImpl.editCustomer(customer);
 		}

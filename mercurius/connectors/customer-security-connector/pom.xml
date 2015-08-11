@@ -32,20 +32,5 @@
 			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
 			<artifactId>security-mgr-impl</artifactId>
 		</dependency>
-
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-			<optional>true</optional>
-		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>aspectj-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
 </project>

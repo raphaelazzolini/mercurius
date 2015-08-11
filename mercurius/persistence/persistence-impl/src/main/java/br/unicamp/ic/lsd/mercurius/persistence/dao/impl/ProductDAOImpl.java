@@ -1,5 +1,6 @@
 package br.unicamp.ic.lsd.mercurius.persistence.dao.impl;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -26,6 +27,8 @@ import br.unicamp.ic.lsd.mercurius.persistence.dao.ProductDAO;
 import br.unicamp.ic.lsd.mercurius.persistence.dao.ProductImageDAO;
 import br.unicamp.ic.lsd.mercurius.persistence.dao.ProductQuantityDAO;
 import br.unicamp.ic.lsd.mercurius.persistence.entities.ProductImpl;
+import br.unicamp.ic.lsd.mercurius.persistence.spec.req.PersistenceCacheMgt;
+import br.unicamp.ic.lsd.mercurius.persistencecacheconnector.CacheConnectorComponentFactory;
 
 import com.google.common.base.Strings;
 
@@ -68,10 +71,19 @@ public class ProductDAOImpl extends AbstractDAO<Product, Integer> implements Pro
 
 	@Override
 	public Product loadCategories(Product product) {
-		product = findById(product.getId());
-		Hibernate.initialize(product.getCategories());
-		loadImagesFromQuantities(product.getQuantities());
-		return product;
+		PersistenceCacheMgt cacheMgt = (PersistenceCacheMgt) CacheConnectorComponentFactory.createInstance()
+				.getProvidedInterface("PersistenceCacheMgt");
+		Product cachedValue = null;
+		if (cacheMgt != null) {
+			cachedValue = cacheMgt.getFromProductWithCategoriesCache(product);
+		}
+		if (cachedValue == null) {
+			cachedValue = findById(product.getId());
+			Hibernate.initialize(cachedValue.getCategories());
+			loadImagesFromQuantities(cachedValue.getQuantities());
+			cacheMgt.putOnProductWithCategoriesCache(product, cachedValue);
+		}
+		return cachedValue;
 	}
 
 	@Override
@@ -94,36 +106,63 @@ public class ProductDAOImpl extends AbstractDAO<Product, Integer> implements Pro
 
 	@Override
 	public List<Product> searchByText(String text) {
-		Product productEntity = newInstance();
-		FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(em);
+		PersistenceCacheMgt cacheMgt = (PersistenceCacheMgt) CacheConnectorComponentFactory.createInstance()
+				.getProvidedInterface("PersistenceCacheMgt");
+		List<Product> cachedValue = new ArrayList<Product>();
+		if (cacheMgt != null) {
+			cachedValue = cacheMgt.getFromProductSearchCache(text);
+		}
+		if (cachedValue == null) {
+			Product productEntity = newInstance();
+			FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(em);
+			/*
+			 * try { fullTextEntityManager.createIndexer().startAndWait(); }
+			 * catch (InterruptedException e) { // TODO Auto-generated catch
+			 * block e.printStackTrace(); }
+			 */
+			QueryBuilder qb = fullTextEntityManager.getSearchFactory().buildQueryBuilder()
+					.forEntity(productEntity.getClass()).get();
+			if (!Strings.isNullOrEmpty(text)) {
+				Query query = qb.keyword().onField("name").andField("details").andField("technicalDetails")
+						.matching(text).createQuery();
 
-		QueryBuilder qb = fullTextEntityManager.getSearchFactory().buildQueryBuilder()
-				.forEntity(productEntity.getClass()).get();
-		if (!Strings.isNullOrEmpty(text)) {
-			Query query = qb.keyword().onField("name").andField("details").andField("technicalDetails").matching(text)
-					.createQuery();
+				javax.persistence.Query persistenceQuery = fullTextEntityManager.createFullTextQuery(query,
+						productEntity.getClass());
+				List<Product> result = persistenceQuery.getResultList();
 
-			javax.persistence.Query persistenceQuery = fullTextEntityManager.createFullTextQuery(query,
-					productEntity.getClass());
-			List<Product> result = persistenceQuery.getResultList();
-
-			if (CollectionUtils.isNotEmpty(result)) {
-				for (Product product : result) {
-					loadImagesFromQuantities(product.getQuantities());
+				if (CollectionUtils.isNotEmpty(result)) {
+					for (Product product : result) {
+						loadImagesFromQuantities(product.getQuantities());
+					}
+					cachedValue = result;
+					if (cacheMgt != null) {
+						cacheMgt.putOnProductSearchCache(text, cachedValue);
+					}
+					return cachedValue;
 				}
 			}
-			return result;
+		} else {
+			return cachedValue;
 		}
 		return Collections.emptyList();
 	}
 
 	@Override
 	public Product loadProductImages(Product product) {
+		Product cachedValue = null;
 		if (product != null) {
-			product = findById(product.getId());
-			loadImagesFromQuantities(product.getQuantities());
+			PersistenceCacheMgt cacheMgt = (PersistenceCacheMgt) CacheConnectorComponentFactory.createInstance()
+					.getProvidedInterface("PersistenceCacheMgt");
+
+			if (cacheMgt != null) {
+				cachedValue = findById(product.getId());
+				loadImagesFromQuantities(cachedValue.getQuantities());
+			}
+			if (cacheMgt != null) {
+				cacheMgt.putOnProductWithImagesCache(product, cachedValue);
+			}
 		}
-		return product;
+		return cachedValue;
 	}
 
 	private void loadImagesFromQuantities(List<ProductQuantity> quantities) {

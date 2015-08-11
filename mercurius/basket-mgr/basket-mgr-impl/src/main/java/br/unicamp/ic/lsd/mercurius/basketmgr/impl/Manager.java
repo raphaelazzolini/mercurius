@@ -4,8 +4,10 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import br.unicamp.ic.lsd.mercurius.basketloggingconnector.BasketLoggingConnectorComponentFactory;
 import br.unicamp.ic.lsd.mercurius.basketmgr.spec.prov.BasketManager;
 import br.unicamp.ic.lsd.mercurius.basketmgr.spec.prov.BasketMgt;
+import br.unicamp.ic.lsd.mercurius.basketmgr.spec.req.BasketLoggingMgt;
 import br.unicamp.ic.lsd.mercurius.basketmgr.spec.req.BasketProductMgt;
 import br.unicamp.ic.lsd.mercurius.basketmgr.spec.req.SaveBasketMgt;
 import br.unicamp.ic.lsd.mercurius.basketproductconnector.ProductConnectorComponentFactory;
@@ -31,9 +33,12 @@ class Manager extends AManager implements BasketManager {
 		setProvidedInterfaceType(I_MANAGER, IManager.class);
 		setRequiredInterfaceType(BASKET_PRODUCT_MGT, BasketProductMgt.class);
 		setRequiredInterfaceType(SAVE_BASKET_MGT, SaveBasketMgt.class);
+		setRequiredInterfaceType("BasketLoggingMgt", BasketLoggingMgt.class);
 
 		IManager productConnectorManager = ProductConnectorComponentFactory.createInstance();
 		setRequiredInterface(BASKET_PRODUCT_MGT, productConnectorManager.getProvidedInterface(BASKET_PRODUCT_MGT));
+		IManager loggingConnectorManager = BasketLoggingConnectorComponentFactory.createInstance();
+		setRequiredInterface("BasketLoggingMgt", loggingConnectorManager.getProvidedInterface("BasketLoggingMgt"));
 
 		setProvidedInterface(I_MANAGER, this);
 		setProvidedInterface(BASKET_MGT, new BasketFacade(this));

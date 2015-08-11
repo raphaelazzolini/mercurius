@@ -1,13 +1,10 @@
 package br.unicamp.ic.lsd.mercurius.ordermgr.spec.req;
 
-import java.util.List;
-
-import br.unicamp.ic.lsd.mercurius.datatype.Customer;
 import br.unicamp.ic.lsd.mercurius.datatype.Order;
-import br.unicamp.ic.lsd.mercurius.datatype.Promotion;
+import br.unicamp.ic.lsd.mercurius.datatype.OrderTotal;
 
 public interface OrderPromotionMgt {
 
-	List<Promotion> getPromotionsForOrder(Order order, Customer customer);
+	Order getOrderWithDiscount(Order order, OrderTotal totalDiscount);
 
 }
