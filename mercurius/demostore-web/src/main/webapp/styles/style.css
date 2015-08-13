@@ -1,3 +1,8 @@
+body {
+	max-width: 980px;
+	margin: 0 auto;
+}
+
 .ui-selectonemenu label.ui-selectonemenu-label {
 	width: initial !important;
 }

@@ -1,3 +1,8 @@
+body {
+	max-width: 980px;
+	margin: 0 auto;
+}
+
 legend {
 	width: inherit;
 	font-size: inherit;
