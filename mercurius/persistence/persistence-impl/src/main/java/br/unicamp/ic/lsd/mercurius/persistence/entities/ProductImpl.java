@@ -114,8 +114,7 @@ public class ProductImpl implements Product {
 	@JoinColumn(name = "manufacturer_id", nullable = false)
 	private Manufacturer manufacturer;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "product", cascade = CascadeType.ALL,
-			targetEntity = ProductQuantityImpl.class)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "product", targetEntity = ProductQuantityImpl.class)
 	private List<ProductQuantity> quantities = new ArrayList<>();
 
 	@Transient
