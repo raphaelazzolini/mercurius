@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -115,9 +116,15 @@ public class ProductsAdminMBean implements Serializable {
 		product.setManufacturer(productMgt.getManufacturerById(selectedManufacturerer));
 		product.setCategories(productMgt.getCategoriesByIds(selectedCategories));
 
+		if (product.getDateAdded() == null) {
+			product.setDateAdded(new Date());
+		}
+
+		List<ProductQuantity> quantities = product.getQuantities();
+		product.setQuantities(null);
 		Product savedProduct = productMgt.saveProduct(product);
 
-		for (ProductQuantity sku : product.getQuantities()) {
+		for (ProductQuantity sku : quantities) {
 			sku.setProduct(savedProduct);
 			ProductQuantity savedSku = productMgt.saveProductQuantity(sku);
 			for (ProductImage image : sku.getProductImages()) {
@@ -137,6 +144,9 @@ public class ProductsAdminMBean implements Serializable {
 				productMgt.deleteProductQuantity(sku);
 			}
 		}
+
+		savedProduct.setQuantities(quantities);
+		product = savedProduct;
 
 		skusToDelete = null;
 		imagesDelete = null;
@@ -204,8 +214,7 @@ public class ProductsAdminMBean implements Serializable {
 			editingSku = false;
 		} catch (Exception e) {
 			// logger.error("Erro ao salvar a imagem", e);
-			// addMessage("admin.produtos.erro_upload",
-			// FacesMessage.SEVERITY_ERROR);
+			addMessage("admin.produtos.erro_upload", FacesMessage.SEVERITY_ERROR);
 		}
 	}
 
