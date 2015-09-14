@@ -55,12 +55,12 @@
 
 		<dependency>
 			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-			<artifactId>order-logging-connector</artifactId>
+			<artifactId>logging-mgr-impl</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-			<artifactId>order-promotion-connector</artifactId>
+			<artifactId>promotion-mgr</artifactId>
 		</dependency>
 
 		<dependency>
@@ -84,11 +84,11 @@
 					<aspectLibraries>
 						<aspectLibrary>
 							<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-							<artifactId>order-logging-connector</artifactId>
+							<artifactId>logging-mgr-impl</artifactId>
 						</aspectLibrary>
 						<aspectLibrary>
 							<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-							<artifactId>order-promotion-connector</artifactId>
+							<artifactId>promotion-mgr</artifactId>
 						</aspectLibrary>
 					</aspectLibraries>
 				</configuration>

@@ -39,7 +39,7 @@
 
 		<dependency>
 			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-			<artifactId>basket-logging-connector</artifactId>
+			<artifactId>logging-mgr-impl</artifactId>
 		</dependency>
 
 		<dependency>
@@ -102,7 +102,7 @@
 					<aspectLibraries>
 						<aspectLibrary>
 							<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-							<artifactId>basket-logging-connector</artifactId>
+							<artifactId>logging-mgr-impl</artifactId>
 						</aspectLibrary>
 					</aspectLibraries>
 				</configuration>

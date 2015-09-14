@@ -14,7 +14,8 @@
   <dependencies>
 		<dependency>
 			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-			<artifactId>cryptography-mgr-impl</artifactId>
+			<artifactId>datatype</artifactId>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>

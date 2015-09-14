@@ -14,7 +14,6 @@ class Manager extends AManager implements IManager {
 		setProvidedInterfaceType("IManager", IManager.class);
 		setProvidedInterfaceType("AdminProductMgt", AdminProductMgt.class);
 		setRequiredInterfaceType("ProductMgt", ProductMgt.class);
-		setRequiredInterfaceType("ProductMgt", ProductMgt.class);
 		setRequiredInterfaceType("CategoryMgt", ProductCategoryMgt.class);
 
 		IManager productManager = ProductMgrComponentFactory.createInstance();

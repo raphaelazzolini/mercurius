@@ -44,7 +44,7 @@
 
 		<dependency>
 			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-			<artifactId>product-promotion-connector</artifactId>
+			<artifactId>promotion-mgr</artifactId>
 		</dependency>
 
 		<dependency>
@@ -63,7 +63,7 @@
 					<aspectLibraries>
 						<aspectLibrary>
 							<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-							<artifactId>product-promotion-connector</artifactId>
+							<artifactId>promotion-mgr</artifactId>
 						</aspectLibrary>
 					</aspectLibraries>
 				</configuration>

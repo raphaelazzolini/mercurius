@@ -15,8 +15,13 @@
   <dependencies>
   		<dependency>
 			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-			<artifactId>security-mgr-spec</artifactId>
+			<artifactId>datatype</artifactId>
 			<optional>true</optional>
+		</dependency>
+
+  		<dependency>
+			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+			<artifactId>security-mgr-spec</artifactId>
 		</dependency>
 
 		<dependency>
@@ -36,8 +41,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
+			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+			<artifactId>customer-mgr-spec</artifactId>
 		</dependency>
 	</dependencies>
 

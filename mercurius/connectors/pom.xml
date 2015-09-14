@@ -16,19 +16,10 @@
 	<name>Connectors</name>
 
 	<modules>
-		<module>basket-logging-connector</module>
 		<module>basket-product-connector</module>
 		<module>order-basket-connector</module>
 		<module>order-product-connector</module>
 		<module>order-payment-connector</module>
-		<module>product-search-logging-connector</module>
-		<module>order-logging-connector</module>
-		<module>customer-security-connector</module>
-		<module>view-exception-handler-connector</module>
-		<module>order-promotion-connector</module>
-		<module>product-search-promotion-connector</module>
-		<module>persistence-cache-connector</module>
-		<module>product-promotion-connector</module>
 		<module>view-customer-connector</module>
 		<module>view-product-search-connector</module>
 		<module>view-basket-connector</module>
