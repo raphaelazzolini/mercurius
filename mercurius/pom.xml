@@ -218,7 +218,7 @@
 
 			<dependency>
 				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-				<artifactId>logging-mgr-spec</artifactId>
+				<artifactId>logging-mgr</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
@@ -280,6 +280,60 @@
 			<dependency>
 				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
 				<artifactId>order-product-connector</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+				<artifactId>basket-logging-connector</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+				<artifactId>product-search-logging-connector</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+				<artifactId>order-logging-connector</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+				<artifactId>customer-security-connector</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+				<artifactId>view-exception-handler-connector</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+				<artifactId>order-promotion-connector</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+				<artifactId>product-promotion-connector</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+				<artifactId>product-search-promotion-connector</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+				<artifactId>persistence-cache-connector</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
@@ -365,12 +419,6 @@
 			<dependency>
 				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
 				<artifactId>customer-mgr-impl</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-				<artifactId>logging-mgr-impl</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 

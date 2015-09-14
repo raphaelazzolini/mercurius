@@ -46,12 +46,22 @@
 
 		<dependency>
 			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-			<artifactId>logging-mgr-impl</artifactId>
+			<artifactId>product-search-logging-connector</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+			<artifactId>product-search-promotion-connector</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
 			<artifactId>promotion-mgr</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+			<artifactId>logging-mgr</artifactId>
 		</dependency>
 
 		<dependency>
@@ -126,11 +136,11 @@
 					<aspectLibraries>
 						<aspectLibrary>
 							<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-							<artifactId>logging-mgr-impl</artifactId>
+							<artifactId>product-search-logging-connector</artifactId>
 						</aspectLibrary>
 						<aspectLibrary>
 							<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-							<artifactId>promotion-mgr</artifactId>
+							<artifactId>product-search-promotion-connector</artifactId>
 						</aspectLibrary>
 					</aspectLibraries>
 				</configuration>

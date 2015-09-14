@@ -39,6 +39,7 @@ class PaymentAdapter implements PaymentMgt {
 
 	@Override
 	public List<PaymentNotification> checkPaymentNotificatons(String transactionId) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

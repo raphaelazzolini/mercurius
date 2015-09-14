@@ -26,11 +26,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-			<artifactId>order-mgr-spec</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<optional>true</optional>
