@@ -1,5 +1,6 @@
 package br.unicamp.ic.lsd.mercurius.viewproductconnector;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -45,6 +46,11 @@ class ViewProductAdapter implements ViewProductMgt {
 		}
 		categoriesList.add(category);
 		return categoriesList;
+	}
+	
+	@Override
+	public Collection<Product> getFirstPageProducts() {
+		return productMgt.getRandomProducts(4);
 	}
 
 }

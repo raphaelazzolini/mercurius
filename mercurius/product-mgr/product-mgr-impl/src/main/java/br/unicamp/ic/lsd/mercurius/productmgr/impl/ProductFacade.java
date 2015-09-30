@@ -2,6 +2,8 @@ package br.unicamp.ic.lsd.mercurius.productmgr.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import br.unicamp.ic.lsd.mercurius.datatype.Configuration;
@@ -116,6 +118,15 @@ class ProductFacade implements ProductMgt {
 	@Override
 	public Manufacturer getManufacturerById(Integer id) {
 		return manager.getManufactoryDAO().findById(id);
+	}
+	
+	@Override
+	public Collection<Product> getRandomProducts(Integer quantity) {
+		if (quantity == null || quantity < 1) {
+			return Collections.emptyList();
+		}
+		Collection<Product> products = manager.getProductDAO().getRandomProducts(quantity);
+		return products;
 	}
 
 }
