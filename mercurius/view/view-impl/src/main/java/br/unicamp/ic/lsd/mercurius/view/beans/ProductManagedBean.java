@@ -2,6 +2,7 @@ package br.unicamp.ic.lsd.mercurius.view.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -82,6 +83,10 @@ public class ProductManagedBean implements Serializable {
 		}
 
 		return model;
+	}
+
+	public Collection<Product> getFirstPageProducts() {
+		return productMgt.getFirstPageProducts();
 	}
 
 	public Product getProduct() {

@@ -1,5 +1,6 @@
 package br.unicamp.ic.lsd.mercurius.persistence.dao;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -23,5 +24,7 @@ public interface ProductDAO extends DAO<Product, Integer> {
 	Long getProductCount();
 
 	void indexProductSearch();
+
+	Collection<Product> getRandomProducts(Integer quantity);
 
 }
