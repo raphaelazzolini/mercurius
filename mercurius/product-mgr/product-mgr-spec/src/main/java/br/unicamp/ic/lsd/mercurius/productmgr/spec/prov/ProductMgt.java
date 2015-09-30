@@ -1,6 +1,7 @@
 package br.unicamp.ic.lsd.mercurius.productmgr.spec.prov;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 
 import br.unicamp.ic.lsd.mercurius.datatype.Category;
@@ -153,5 +154,13 @@ public interface ProductMgt {
 	 * @return
 	 */
 	Manufacturer getManufacturerById(Integer id);
+	
+	/**
+	 * Return a collection with random products
+	 * 
+	 * @param quantity
+	 * @return
+	 */
+	Collection<Product> getRandomProducts(Integer quantity);
 
 }
