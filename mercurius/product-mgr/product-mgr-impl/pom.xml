@@ -44,13 +44,18 @@
 
 		<dependency>
 			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-			<artifactId>product-promotion-connector</artifactId>
+			<artifactId>product-marketing-connector</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
 		</dependency>
 	</dependencies>
 
@@ -63,7 +68,7 @@
 					<aspectLibraries>
 						<aspectLibrary>
 							<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-							<artifactId>product-promotion-connector</artifactId>
+							<artifactId>product-marketing-connector</artifactId>
 						</aspectLibrary>
 					</aspectLibraries>
 				</configuration>

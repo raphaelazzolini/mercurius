@@ -2,17 +2,15 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-	<artifactId>product-mgr-spec</artifactId>
-	<packaging>jar</packaging>
-
-	<name>Product Manager Specification</name>
-
 	<parent>
-		<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+		<groupId>br.unicamp.ic.lsd</groupId>
+		<artifactId>mercurius</artifactId>
 		<version>1.3</version>
-		<artifactId>product-mgr</artifactId>
 	</parent>
+
+	<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+	<artifactId>recommended-products-mgr</artifactId>
+	<name>Recommended Products</name>
 
 	<dependencies>
 		<dependency>
@@ -28,20 +26,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-			<artifactId>category-mgr-spec</artifactId>
-			<optional>true</optional>
-		</dependency>
-
-		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<optional>true</optional>
-		</dependency>
-
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
 		</dependency>
 	</dependencies>
 

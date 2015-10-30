@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import br.unicamp.ic.lsd.mercurius.datatype.Configuration;
 import br.unicamp.ic.lsd.mercurius.datatype.Manufacturer;
 import br.unicamp.ic.lsd.mercurius.datatype.Product;
@@ -119,9 +121,9 @@ class ProductFacade implements ProductMgt {
 	public Manufacturer getManufacturerById(Integer id) {
 		return manager.getManufactoryDAO().findById(id);
 	}
-	
+
 	@Override
-	public Collection<Product> getRandomProducts(Integer quantity) {
+	public Collection<Product> getRandomProducts(HttpServletRequest request, Integer quantity) {
 		if (quantity == null || quantity < 1) {
 			return Collections.emptyList();
 		}

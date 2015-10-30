@@ -31,6 +31,7 @@
 		<module>demostore-ear</module>
 		<module>connectors</module>
 		<module>admin</module>
+		<module>recommended-products-mgr</module>
 	</modules>
 
 	<properties>
@@ -321,7 +322,7 @@
 
 			<dependency>
 				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
-				<artifactId>product-promotion-connector</artifactId>
+				<artifactId>product-marketing-connector</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
@@ -461,6 +462,12 @@
 			<dependency>
 				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
 				<artifactId>promotion-mgr</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+				<artifactId>recommended-products-mgr</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 

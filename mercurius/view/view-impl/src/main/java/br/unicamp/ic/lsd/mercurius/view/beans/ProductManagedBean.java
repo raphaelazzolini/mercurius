@@ -86,7 +86,7 @@ public class ProductManagedBean implements Serializable {
 	}
 
 	public Collection<Product> getFirstPageProducts() {
-		return productMgt.getFirstPageProducts();
+		return productMgt.getFirstPageProducts(request);
 	}
 
 	public Product getProduct() {
