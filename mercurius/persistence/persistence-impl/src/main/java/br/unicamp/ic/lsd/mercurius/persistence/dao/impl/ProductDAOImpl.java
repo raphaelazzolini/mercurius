@@ -167,10 +167,10 @@ public class ProductDAOImpl extends AbstractDAO<Product, Integer> implements Pro
 		}
 		return result;
 	}
-	
+
 	@Override
 	public Collection<Product> getRecommendedProducts(Double x_coord,Double y_coord,Double distance, Integer quantity) {
-		javax.persistence.Query query = em.createNativeQuery("select a.* from product a inner join (select p.product_id from product p inner join category_to_price c on c.product_id=p.product_id order by abs(sqrt(pow(category_id - :x_coord , 2)+pow(range_price_id - :y_coord , 2)) - :distance ) limit :quantity ) b on a.product_id=b.product_id" , Product.class);
+		javax.persistence.Query query = em.createNativeQuery("select a.* from product a inner join (select p.product_id from product p inner join category_to_price c on c.product_id=p.product_id order by abs(sqrt(pow(category_id - :x_coord , 2)+pow(range_price_id - :y_coord , 2)) - :distance ) limit :quantity ) b on a.product_id=b.product_id", ProductImpl.class);
 		query.setParameter("x_coord", x_coord);
 		query.setParameter("y_coord", y_coord);
 		query.setParameter("distance", distance);

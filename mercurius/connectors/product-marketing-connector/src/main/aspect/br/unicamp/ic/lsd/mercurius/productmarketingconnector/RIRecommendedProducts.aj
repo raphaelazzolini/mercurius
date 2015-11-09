@@ -17,9 +17,7 @@ public aspect RIRecommendedProducts {
 
 	Collection<Product> around(HttpServletRequest request, Integer quantity) : XPIProduct.recommendedProductsPointcut(HttpServletRequest, Integer)  && args(request, quantity) {
 		MarketingAdapter marketingAdapter = new MarketingAdapter();
-
-		// TODO: chamar o pegar o valor do cookie de produtos recomendados, passando-os para o método
-		// getRecommendedProducts() do marketingAdapter, junto com o quantity. Retornar a lista desse método.
+		Collection<Product> listaProdutosRecomendados = null;
 
 		Cookie cookie = null;
 		for(Cookie cookieRequest : request.getCookies()) {
@@ -28,25 +26,24 @@ public aspect RIRecommendedProducts {
 				break;
 			}
 		}
-		
+
 		if (cookie == null) {
 			return proceed(request, quantity);
 		}
-		
+
 		String cookieValue = cookie.getValue();
-		String[] Values = cookieValue.split(";");
-		Integer numCookies = Values.length;
-		String[] newestCookie = Values[numCookies-1].split("/");
-		String[] lastCookie = Values[numCookies-2].split("/");
-		Double x_coord = Double.parseDouble(newestCookie[1]);
-		Double y_coord = Double.parseDouble(newestCookie[2]);
-		Double distance = (sqrt(pow(Double.parseDouble(newestCookie[1])-Double.parseDouble(lastCookie[1]),2)+pow(Double.parseDouble(newestCookie[2])-Double.parseDouble(lastCookie[2]),2)));
+		String[] values = cookieValue.split(",");
+		Integer numCookies = values.length;
 
+		if (numCookies > 1) {
+			String[] newestCookie = values[numCookies-1].split("/");
+			String[] lastCookie = values[numCookies-2].split("/");
+			Double x_coord = Double.parseDouble(newestCookie[1]);
+			Double y_coord = Double.parseDouble(newestCookie[2]);
+			Double distance = (sqrt(pow(Double.parseDouble(newestCookie[1])-Double.parseDouble(lastCookie[1]),2)+pow(Double.parseDouble(newestCookie[2])-Double.parseDouble(lastCookie[2]),2)));
 
-		//	if (cookie possui produtosRecomendados)
-		// return listaProdutosRecomendados
-		
-		Collection<Product> listaProdutosRecomendados = marketingAdapter.getRecommendedProducts(x_coord,y_coord,distance,quantity);
+			listaProdutosRecomendados = marketingAdapter.getRecommendedProducts(x_coord,y_coord,distance,quantity);
+		}
 
 		// Se a lista retornada for nula ou vazia, retornar o valor dar continuidade ao método entrecortado
 		if(CollectionUtils.isEmpty(listaProdutosRecomendados)){
