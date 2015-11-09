@@ -9,10 +9,16 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.lucene.search.Query;
 import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
 import org.primefaces.model.menu.MenuItem;
@@ -38,9 +44,15 @@ public class ProductManagedBean implements Serializable {
 
 	private IManager viewProductConnector;
 	private ViewProductMgt productMgt;
+	
+	@PersistenceContext
+	private EntityManager em;
 
 	@Inject
 	private HttpServletRequest request;
+	
+	@Inject
+	private HttpServletResponse response;
 
 	@PostConstruct
 	public void init() {
@@ -59,6 +71,33 @@ public class ProductManagedBean implements Serializable {
 			if (CollectionUtils.isNotEmpty(product.getQuantities())) {
 				selectedProductQuantity = product.getQuantities().get(0);
 			}
+			
+			javax.persistence.Query query1 = em.createNativeQuery("select category_id from category_to_price where product_id = :idString");
+			query1.setParameter("idString", idString);
+			List<String> idCat = query1.getResultList();
+			
+			javax.persistence.Query query2 = em.createNativeQuery("select range_price_id from category_to_price where product_id = :idString");
+			query2.setParameter("idString", idString);
+			List<String> idFaixa = query2.getResultList();
+			
+			
+			Cookie cookie = null;
+			for(Cookie cookieRequest : request.getCookies()) {
+				if (cookieRequest.getName().equals("prodRecomendado")) {
+					cookie = cookieRequest;
+					break;
+				}
+			}
+			
+			if (cookie == null) {
+			cookie = new Cookie("prodRecomendado", idString + "/" + idCat.get(0) + "/" + idFaixa.get(0));
+			} else {
+				String novoValor = cookie.getValue() + ";" + idString + "/" + idCat.get(0) + "/" + idFaixa.get(0);
+				cookie.setValue(novoValor);
+			}
+			
+			cookie.setMaxAge(5000000);
+			response.addCookie(cookie);
 		}
 	}
 

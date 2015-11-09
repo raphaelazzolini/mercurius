@@ -10,10 +10,13 @@ public abstract aspect AARecommendedProducts {
 
 	private final RecommendedProductsManager manager = (RecommendedProductsManager) RecommendedProductsMgrComponentFactory.createInstance();
 
-	abstract public pointcut recommendedProducts(String idsList, Integer quantity);
+	abstract public pointcut recommendedProducts(Double x_coord,Double y_coord,Double distance, Integer quantity);
 
-	Collection<Product> around(String idsList, Integer quantity) : recommendedProducts(String, Integer) && args(idsList, quantity) {
+	Collection<Product> around(Double x_coord,Double y_coord,Double distance, Integer quantity) : recommendedProducts(Double, Double, Double, Integer) && args(x_coord, y_coord, distance, quantity) {
 		// TODO: realizar a lógica para obter os produtos recomendados
+		
+		manager.getProductDAO().getRecommendedProducts(x_coord, y_coord, distance, quantity);
+		
 		return null;
 	}
 }

@@ -16,7 +16,7 @@ public class MarketingAdapter {
 		return product;
 	}
 
-	public Collection<Product> getRecommendedProducts(String idsList, Integer quantity) {
+	public Collection<Product> getRecommendedProducts(Double x_coord,Double y_coord,Double distance, Integer quantity) {
 		return CollectionUtils.emptyCollection();
 	}
 
