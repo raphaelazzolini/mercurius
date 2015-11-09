@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
@@ -51,8 +53,6 @@ public class ProductManagedBean implements Serializable {
 	@Inject
 	private HttpServletRequest request;
 	
-	@Inject
-	private HttpServletResponse response;
 
 	@PostConstruct
 	public void init() {
@@ -61,7 +61,11 @@ public class ProductManagedBean implements Serializable {
 	}
 
 	public void productDetails() throws ProductNotFoundException {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		HttpServletResponse response = (HttpServletResponse) externalContext.getResponse();
 		String idString = request.getParameter("prodId");
+
 		if (NumberUtils.isNumber(idString)) {
 			Integer idProduto = Integer.parseInt(idString);
 			product = productMgt.getProduct(idProduto);
@@ -74,11 +78,11 @@ public class ProductManagedBean implements Serializable {
 			
 			javax.persistence.Query query1 = em.createNativeQuery("select category_id from category_to_price where product_id = :idString");
 			query1.setParameter("idString", idString);
-			List<String> idCat = query1.getResultList();
+			List<Integer> idCat = query1.getResultList();
 			
 			javax.persistence.Query query2 = em.createNativeQuery("select range_price_id from category_to_price where product_id = :idString");
 			query2.setParameter("idString", idString);
-			List<String> idFaixa = query2.getResultList();
+			List<Integer> idFaixa = query2.getResultList();
 			
 			
 			Cookie cookie = null;
