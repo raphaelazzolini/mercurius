@@ -7,9 +7,12 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -49,7 +52,11 @@ public class ProductManagedBean implements Serializable {
 	}
 
 	public void productDetails() throws ProductNotFoundException {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		HttpServletResponse response = (HttpServletResponse) externalContext.getResponse();
 		String idString = request.getParameter("prodId");
+
 		if (NumberUtils.isNumber(idString)) {
 			Integer idProduto = Integer.parseInt(idString);
 			product = productMgt.getProduct(idProduto);
