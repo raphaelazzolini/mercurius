@@ -9,7 +9,7 @@ Below you find publications about this project:
 This project is builded with [Maven](https://maven.apache.org/). To build it you must build the [COSMOS*](https://github.com/raphaelazzolini/cosmos) jar first.
 
 The last version of this Software Products Line was tested in the [Wildfly Application Server](http://wildfly.org/) version [8.1.0-Final](http://download.jboss.org/wildfly/8.1.0.Final/wildfly-8.1.0.Final.zip). We provide a pre-configured Virtual Machine (VM), in OVA format, with a Demo Store in the link below:
-* [CentOS](https://drive.google.com/file/d/0B_amipaKDpCjSXRVcmhRcFdWRjQ/view?usp=sharing)
+* [CentOS](https://drive.google.com/file/d/0B_amipaKDpCjZ2M4eFpNWEV1UDA/view?usp=sharing)
 
 These VMs were created on [Oracle VM VirtualBox](https://www.virtualbox.org/). You must create a [Host-Only Network](https://www.virtualbox.org/manual/ch06.html#network_hostonly) with the ip address 192.168.56.1 to access the VMs.
 
