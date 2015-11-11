@@ -13,13 +13,13 @@
 
 		<p:panel id="identificationPanel" header="#{messages['order.title']}">
 			<p:panelGrid columns="2" style="border: transparent;">
-				<p:outputLabel value="{messages['order.productsTotal']}"/>
+				<p:outputLabel value="#{messages['order.productsTotal']}"/>
 				<h:outputText value="(#{orderManagedBean.numberOfItems}): #{orderManagedBean.productsTotal}"/>
 
-				<p:outputLabel value="{messages['order.subtotal']}"/>
+				<p:outputLabel value="#{messages['order.subtotal']}"/>
 				<h:outputText value="#{orderManagedBean.subTotal}"/>
 
-				<p:outputLabel value="{messages['order.total']}"/>
+				<p:outputLabel value="#{messages['order.total']}"/>
 				<h:outputText value="#{orderManagedBean.total}"/>
 			</p:panelGrid>
 

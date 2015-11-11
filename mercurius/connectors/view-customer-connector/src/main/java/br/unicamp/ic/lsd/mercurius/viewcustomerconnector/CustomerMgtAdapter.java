@@ -41,7 +41,7 @@ class CustomerMgtAdapter implements ViewCustomerMgt {
 			address.setEmailAddress(customer.getEmailAddress());
 			address.setTelephoneNumber(customer.getTelephoneNumber());
 
-			customerMgt.saveAddress(address);
+			address = customerMgt.saveAddress(address);
 
 			customer.setDefaultAddress(address);
 			customerMgt.editCustomer(customer);
