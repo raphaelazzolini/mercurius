@@ -1,5 +1,6 @@
 package br.unicamp.ic.lsd.mercurius.view.spec.req;
 
+import java.util.Collection;
 import java.util.List;
 
 import br.unicamp.ic.lsd.mercurius.datatype.Category;
@@ -11,5 +12,7 @@ public interface ViewProductMgt {
 	Product getProduct(Integer productId) throws ProductNotFoundException;
 
 	List<Category> getCategoryParents(Category category);
+
+	Collection<Product> getFirstPageProducts();
 
 }

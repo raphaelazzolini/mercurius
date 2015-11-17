@@ -1,5 +1,6 @@
 package br.unicamp.ic.lsd.mercurius.persistence.dao.impl;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -146,6 +147,25 @@ public class ProductDAOImpl extends AbstractDAO<Product, Integer> implements Pro
 		FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(em);
 		fullTextEntityManager.purgeAll(ProductImpl.class);
 		fullTextEntityManager.createIndexer().start();
+	}
+
+	@Override
+	public Collection<Product> getRandomProducts(Integer quantity) {
+		TypedQuery<Product> query = em
+				.createQuery(
+						"select p from Product p where p.id >= (select floor((max(id) - :quantity + 1) * rand()) from Product)",
+						Product.class);
+		query.setParameter("quantity", quantity);
+		query.setMaxResults(quantity);
+
+		List<Product> result = query.getResultList();
+
+		if (CollectionUtils.isNotEmpty(result)) {
+			for (Product product : result) {
+				loadImagesFromQuantities(product.getQuantities());
+			}
+		}
+		return result;
 	}
 
 }
