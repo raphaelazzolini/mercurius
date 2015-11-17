@@ -48,6 +48,11 @@
 		</dependency>
 
 		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<optional>true</optional>
@@ -64,6 +69,10 @@
 						<aspectLibrary>
 							<groupId>br.unicamp.ic.lsd.mercurius</groupId>
 							<artifactId>promotion-mgr</artifactId>
+						</aspectLibrary>
+						<aspectLibrary>
+							<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+							<artifactId>recommended-products-mgr</artifactId>
 						</aspectLibrary>
 					</aspectLibraries>
 				</configuration>

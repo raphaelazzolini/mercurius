@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import br.unicamp.ic.lsd.mercurius.datatype.Category;
 import br.unicamp.ic.lsd.mercurius.datatype.Manufacturer;
 import br.unicamp.ic.lsd.mercurius.datatype.Product;
@@ -161,6 +163,6 @@ public interface ProductMgt {
 	 * @param quantity
 	 * @return
 	 */
-	Collection<Product> getRandomProducts(Integer quantity);
+	Collection<Product> getRandomProducts(HttpServletRequest request, Integer quantity);
 
 }

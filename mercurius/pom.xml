@@ -31,6 +31,7 @@
 		<module>demostore-ear</module>
 		<module>connectors</module>
 		<module>admin</module>
+		<module>recommended-products-mgr</module>
 	</modules>
 
 	<properties>
@@ -425,6 +426,12 @@
 			<dependency>
 				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
 				<artifactId>admin-impl</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+ 				<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+				<artifactId>recommended-products-mgr</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 

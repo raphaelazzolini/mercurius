@@ -11,8 +11,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -42,13 +42,13 @@ public class ProductManagedBean implements Serializable {
 
 	private IManager viewProductConnector;
 	private ViewProductMgt productMgt;
-	
+
 	@PersistenceContext
 	private EntityManager em;
 
 	@Inject
 	private HttpServletRequest request;
-	
+
 	@Inject
 	private HttpServletRequest response;
 
@@ -69,7 +69,7 @@ public class ProductManagedBean implements Serializable {
 			if (CollectionUtils.isNotEmpty(product.getQuantities())) {
 				selectedProductQuantity = product.getQuantities().get(0);
 			}
-			
+
 			javax.persistence.Query query1 = em
 					.createNativeQuery("select category_id from category_to_price where product_id = :idString");
 			query1.setParameter("idString", idString);
@@ -124,7 +124,7 @@ public class ProductManagedBean implements Serializable {
 	}
 
 	public Collection<Product> getFirstPageProducts() {
-		return productMgt.getFirstPageProducts();
+		return productMgt.getFirstPageProducts(request);
 	}
 
 	public Product getProduct() {

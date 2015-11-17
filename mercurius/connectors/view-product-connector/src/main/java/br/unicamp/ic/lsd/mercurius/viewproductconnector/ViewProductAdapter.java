@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import br.unicamp.ic.lsd.mercurius.datatype.Category;
 import br.unicamp.ic.lsd.mercurius.datatype.Product;
 import br.unicamp.ic.lsd.mercurius.excpetionhandler.exceptions.ProductNotFoundException;
@@ -40,8 +42,8 @@ class ViewProductAdapter implements ViewProductMgt {
 	}
 
 	@Override
-	public Collection<Product> getFirstPageProducts() {
-		return productMgt.getRandomProducts(4);
+	public Collection<Product> getFirstPageProducts(HttpServletRequest request) {
+		return productMgt.getRandomProducts(request, 4);
 	}
 
 	private List<Category> getCategoriesTree(Category category) {
