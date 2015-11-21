@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
@@ -49,9 +51,6 @@ public class ProductManagedBean implements Serializable {
 	@Inject
 	private HttpServletRequest request;
 
-	@Inject
-	private HttpServletRequest response;
-
 	@PostConstruct
 	public void init() {
 		viewProductConnector = ViewProductConnectorFactory.createInstance();
@@ -59,7 +58,11 @@ public class ProductManagedBean implements Serializable {
 	}
 
 	public void productDetails() throws ProductNotFoundException {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		HttpServletResponse response = (HttpServletResponse) externalContext.getResponse();
 		String idString = request.getParameter("prodId");
+
 		if (NumberUtils.isNumber(idString)) {
 			Integer idProduto = Integer.parseInt(idString);
 			product = productMgt.getProduct(idProduto);
@@ -96,7 +99,7 @@ public class ProductManagedBean implements Serializable {
 			}
 
 			cookie.setMaxAge(5000000);
-			((HttpServletResponse) response).addCookie(cookie);
+			response.addCookie(cookie);
 		}
 	}
 
