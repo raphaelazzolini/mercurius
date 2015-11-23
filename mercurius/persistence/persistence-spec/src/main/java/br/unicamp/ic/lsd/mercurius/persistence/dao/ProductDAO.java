@@ -26,5 +26,7 @@ public interface ProductDAO extends DAO<Product, Integer> {
 	void indexProductSearch();
 
 	Collection<Product> getRandomProducts(Integer quantity);
+	
+	Collection<Product> getRecommendedProducts(Double x_coord,Double y_coord,Double distance, Integer quantity);
 
 }

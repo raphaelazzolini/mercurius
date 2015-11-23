@@ -4,6 +4,9 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Cookie;
+
 import br.unicamp.ic.lsd.mercurius.datatype.Category;
 import br.unicamp.ic.lsd.mercurius.datatype.Product;
 import br.unicamp.ic.lsd.mercurius.excpetionhandler.exceptions.ProductNotFoundException;
@@ -50,7 +53,36 @@ class ViewProductAdapter implements ViewProductMgt {
 
 	@Override
 	public Collection<Product> getFirstPageProducts() {
+		Cookie cookie = null;
+		for(Cookie cookieRequest : request.getCookies()) {
+			if (cookieRequest.getName().equals("prodRecomendado")) {
+				cookie = cookieRequest;
+				break;
+			}
+		}
+
+		if (cookie == null) {
+			return productMgt.getRandomProducts(4);
+		}
+		
+		String cookieValue = cookie.getValue();
+		String[] values = cookieValue.split(",");
+		Integer numCookies = values.length;
+
+		if (numCookies > 1) {
+			String[] newestCookie = values[numCookies-1].split("/");
+			String[] lastCookie = values[numCookies-2].split("/");
+			Double x_coord = Double.parseDouble(newestCookie[1]);
+			Double y_coord = Double.parseDouble(newestCookie[2]);
+			Double distance = (sqrt(pow(Double.parseDouble(newestCookie[1])-Double.parseDouble(lastCookie[1]),2)+pow(Double.parseDouble(newestCookie[2])-Double.parseDouble(lastCookie[2]),2)));
+
+			return productMgt.getRecommendedProducts(x_coord, y_coord, distance, quantity);
+		}
+		
+
 		return productMgt.getRandomProducts(4);
+		
+		
 	}
 
 }
