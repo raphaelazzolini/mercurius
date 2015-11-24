@@ -14,7 +14,9 @@ import br.unicamp.ic.lsd.mercurius.productmgr.spec.prov.ProductCategoryMgt;
 import br.unicamp.ic.lsd.mercurius.productmgr.spec.prov.ProductManager;
 import br.unicamp.ic.lsd.mercurius.productmgr.spec.prov.ProductMgt;
 import br.unicamp.ic.lsd.mercurius.productmgr.spec.req.ProductPromotionMgt;
+import br.unicamp.ic.lsd.mercurius.productmgr.spec.req.ProductRecommendedProductsMgt;
 import br.unicamp.ic.lsd.mercurius.productpromotionconnector.ProductPromotionComponentFactory;
+import br.unicamp.ic.lsd.mercurius.recommendedproductsconnector.ProductRecommendedProductsComponentFactory;
 import br.unicamp.ic.sed.cosmos.AManagerComposite;
 import br.unicamp.ic.sed.cosmos.IManager;
 
@@ -49,6 +51,10 @@ class Manager extends AManagerComposite implements ProductManager {
 			IManager promotionManager = ProductPromotionComponentFactory.createInstance();
 			setRequiredInterfaceType("ProductPromotionMgt", ProductPromotionMgt.class);
 			setRequiredInterface("ProductPromotionMgt", promotionManager.getProvidedInterface("ProductPromotionMgt"));
+			IManager recommendedProductsManager = ProductRecommendedProductsComponentFactory.createInstance();
+			setRequiredInterfaceType("ProductRecommendedProductsMgt", ProductRecommendedProductsMgt.class);
+			setRequiredInterface("ProductRecommendedProductsMgt",
+					recommendedProductsManager.getProvidedInterface("ProductRecommendedProductsMgt"));
 			setInternalComponent(CATEGORY_MANAGER, CategoryMgrComponentFactory.createInstance());
 			setProvidedInterface(CATEGORY_MGT, new CategoryFacade(this));
 			setProvidedInterfaceType(CATEGORY_MGT, ProductCategoryMgt.class);

@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import br.unicamp.ic.lsd.mercurius.datatype.Category;
 import br.unicamp.ic.lsd.mercurius.datatype.Manufacturer;
 import br.unicamp.ic.lsd.mercurius.datatype.Product;
@@ -156,11 +158,21 @@ public interface ProductMgt {
 	Manufacturer getManufacturerById(Integer id);
 
 	/**
-	 * Return a collection with random products
+	 * Returns a collection with random products
 	 * 
 	 * @param quantity
 	 * @return
 	 */
 	Collection<Product> getRandomProducts(Integer quantity);
+
+	/**
+	 * Returns a collection with recommended products based on the products that
+	 * the customer has viewed
+	 * 
+	 * @param request
+	 * @param quantity
+	 * @return
+	 */
+	Collection<Product> getRecommendedProducts(HttpServletRequest request, Integer quantity);
 
 }

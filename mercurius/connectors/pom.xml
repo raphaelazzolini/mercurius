@@ -35,5 +35,6 @@
 		<module>view-product-connector</module>
 		<module>admin-product-connector</module>
 		<module>admin-product-search-connector</module>
+		<module>product-recommended-products-connector</module>
 	</modules>
 </project>

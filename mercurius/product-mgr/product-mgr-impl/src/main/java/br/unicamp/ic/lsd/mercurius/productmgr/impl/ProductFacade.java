@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import br.unicamp.ic.lsd.mercurius.datatype.Configuration;
 import br.unicamp.ic.lsd.mercurius.datatype.Manufacturer;
 import br.unicamp.ic.lsd.mercurius.datatype.Product;
@@ -15,6 +17,7 @@ import br.unicamp.ic.lsd.mercurius.datatype.ProductQuantity;
 import br.unicamp.ic.lsd.mercurius.productmgr.spec.prov.ProductManager;
 import br.unicamp.ic.lsd.mercurius.productmgr.spec.prov.ProductMgt;
 import br.unicamp.ic.lsd.mercurius.productmgr.spec.req.ProductPromotionMgt;
+import br.unicamp.ic.lsd.mercurius.productmgr.spec.req.ProductRecommendedProductsMgt;
 
 class ProductFacade implements ProductMgt {
 
@@ -133,14 +136,16 @@ class ProductFacade implements ProductMgt {
 		Collection<Product> products = manager.getProductDAO().getRandomProducts(quantity);
 		return products;
 	}
-	
+
 	@Override
-	public Collection<Product> getRecommendedProducts(Double x_coord,Double y_coord,Double distance, Integer quantity) {
+	public Collection<Product> getRecommendedProducts(HttpServletRequest request, Integer quantity) {
 		if (quantity == null || quantity < 1) {
 			return Collections.emptyList();
 		}
-		Collection<Product> products = manager.getProductDAO().getRecommendedProducts(x_coord,y_coord,distance, quantity);
-		return products;
+
+		ProductRecommendedProductsMgt recommendedProductsMgt = (ProductRecommendedProductsMgt) manager
+				.getRequiredInterface("ProductRecommendedProductsMgt");
+		return recommendedProductsMgt.getRecommendedProducts(request, quantity);
 	}
 
 }

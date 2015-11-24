@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
@@ -14,8 +16,6 @@ import javax.persistence.PersistenceContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -46,8 +46,8 @@ public class ProductManagedBean implements Serializable {
 	private ViewProductMgt productMgt;
 
 	@PersistenceContext
-	private EntityManager em;	
-	
+	private EntityManager em;
+
 	@Inject
 	private HttpServletRequest request;
 
@@ -127,7 +127,7 @@ public class ProductManagedBean implements Serializable {
 	}
 
 	public Collection<Product> getFirstPageProducts() {
-		return productMgt.getFirstPageProducts();
+		return productMgt.getFirstPageProducts(request);
 	}
 
 	public Product getProduct() {

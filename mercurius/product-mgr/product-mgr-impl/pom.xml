@@ -46,5 +46,15 @@
 			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
 			<artifactId>product-promotion-connector</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+			<artifactId>product-recommended-products-connector</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+		</dependency>
 	</dependencies>
 </project>

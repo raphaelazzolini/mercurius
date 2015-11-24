@@ -1,4 +1,4 @@
-package br.unicamp.ic.lsd.mercurius.recommendedproductsmgr.impl;
+package br.unicamp.ic.lsd.mercurius.recommendedproducts.impl;
 
 import br.unicamp.ic.sed.cosmos.IManager;
 
