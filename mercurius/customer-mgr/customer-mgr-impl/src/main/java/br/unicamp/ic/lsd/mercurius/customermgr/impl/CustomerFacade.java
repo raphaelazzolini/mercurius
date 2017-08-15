@@ -1,5 +1,7 @@
 package br.unicamp.ic.lsd.mercurius.customermgr.impl;
 
+import java.util.List;
+
 import br.unicamp.ic.lsd.mercurius.addressmgr.spec.prov.AddressMgt;
 import br.unicamp.ic.lsd.mercurius.customermgr.spec.prov.CustomerManager;
 import br.unicamp.ic.lsd.mercurius.customermgr.spec.prov.CustomerMgt;
@@ -125,6 +127,11 @@ public class CustomerFacade implements CustomerMgt {
 	@Override
 	public Address newAddress() {
 		return addressMgt.newAddress();
+	}
+	
+	@Override
+	public List<Customer> getCustomers() {
+		return customerMgtImpl.getCustomers();
 	}
 
 }

@@ -1,9 +1,11 @@
 package br.unicamp.ic.lsd.mercurius.customermgr.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.collections4.CollectionUtils;
 
@@ -86,4 +88,10 @@ class CustomerMgtImpl {
 		return customerDAO.loadCustomerAddresses(customer);
 	}
 
+	List<Customer> getCustomers() {
+		//List<String> clients = new ArrayList<String>(); 
+		//clients.add("elisaferr7@gmail.com");
+		//clients.add("alancorrales31@gmail.com");
+		return (List<Customer>) customerDAO.getCustomers();
+	}
 }

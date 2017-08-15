@@ -48,13 +48,15 @@ class Manager extends AManagerComposite implements ProductManager {
 			setProvidedInterface(I_MANAGER, this);
 			setProvidedInterfaceType(PRODUCT_MGT, ProductMgt.class);
 			setProvidedInterfaceType(I_MANAGER, IManager.class);
+			
 			IManager promotionManager = ProductPromotionComponentFactory.createInstance();
 			setRequiredInterfaceType("ProductPromotionMgt", ProductPromotionMgt.class);
 			setRequiredInterface("ProductPromotionMgt", promotionManager.getProvidedInterface("ProductPromotionMgt"));
+			
 			IManager recommendedProductsManager = ProductRecommendedProductsComponentFactory.createInstance();
 			setRequiredInterfaceType("ProductRecommendedProductsMgt", ProductRecommendedProductsMgt.class);
-			setRequiredInterface("ProductRecommendedProductsMgt",
-					recommendedProductsManager.getProvidedInterface("ProductRecommendedProductsMgt"));
+			setRequiredInterface("ProductRecommendedProductsMgt",recommendedProductsManager.getProvidedInterface("ProductRecommendedProductsMgt"));
+			
 			setInternalComponent(CATEGORY_MANAGER, CategoryMgrComponentFactory.createInstance());
 			setProvidedInterface(CATEGORY_MGT, new CategoryFacade(this));
 			setProvidedInterfaceType(CATEGORY_MGT, ProductCategoryMgt.class);
