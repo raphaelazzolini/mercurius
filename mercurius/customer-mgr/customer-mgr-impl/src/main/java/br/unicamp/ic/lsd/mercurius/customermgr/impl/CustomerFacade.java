@@ -1,5 +1,17 @@
 package br.unicamp.ic.lsd.mercurius.customermgr.impl;
 
+import java.util.List;
+import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 import br.unicamp.ic.lsd.mercurius.addressmgr.spec.prov.AddressMgt;
 import br.unicamp.ic.lsd.mercurius.customermgr.spec.prov.CustomerManager;
 import br.unicamp.ic.lsd.mercurius.customermgr.spec.prov.CustomerMgt;
@@ -121,6 +133,16 @@ public class CustomerFacade implements CustomerMgt {
 	@Override
 	public Address newAddress() {
 		return addressMgt.newAddress();
+	}
+
+	@Override
+	public void sendEmail(List<Customer> customers) {
+	}
+	
+	@Override
+	public void sendEmailMarketing() {
+		List<Customer> customers = (List<Customer>) manager.getCustomerDAO().getCustomers();
+		sendEmail(customers);
 	}
 
 }

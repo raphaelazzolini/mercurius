@@ -103,6 +103,19 @@
 			<artifactId>aspectjrt</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+			<artifactId>customer-mgr-spec</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+			<artifactId>customer-mgr-impl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
+		</dependency>
 	</dependencies>
 
 	<build>

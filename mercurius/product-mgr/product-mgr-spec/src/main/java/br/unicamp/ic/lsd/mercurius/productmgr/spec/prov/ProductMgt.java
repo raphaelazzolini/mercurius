@@ -164,5 +164,7 @@ public interface ProductMgt {
 	 * @return
 	 */
 	Collection<Product> getRandomProducts(HttpServletRequest request, Integer quantity);
+	
+	Collection<Product> getRandomProducts(Integer quantity);
 
 }
