@@ -17,6 +17,7 @@ import javax.persistence.criteria.Root;
 
 import org.apache.commons.collections4.MapUtils;
 
+import br.unicamp.ic.lsd.mercurius.datatype.Customer;
 import br.unicamp.ic.lsd.mercurius.persistence.dao.DAO;
 
 public abstract class AbstractDAO<T extends Serializable, ID extends Serializable> implements DAO<T, ID> {
@@ -182,6 +183,10 @@ public abstract class AbstractDAO<T extends Serializable, ID extends Serializabl
 
 		TypedQuery<T> type = getEntityManager().createQuery(cq);
 		return type;
+	}
+
+	public List<? extends Customer> getCustomers() {
+		return null;
 	}
 
 }

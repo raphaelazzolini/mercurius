@@ -156,14 +156,6 @@ public interface ProductMgt {
 	 * @return
 	 */
 	Manufacturer getManufacturerById(Integer id);
-	
-	/**
-	 * Return a collection with random products
-	 * 
-	 * @param quantity
-	 * @return
-	 */
-	Collection<Product> getRandomProducts(Integer quantity);
 
 	/**
 	 * Return a collection with random products
@@ -172,5 +164,7 @@ public interface ProductMgt {
 	 * @return
 	 */
 	Collection<Product> getRandomProducts(HttpServletRequest request, Integer quantity);
+	
+	Collection<Product> getRandomProducts(Integer quantity);
 
 }

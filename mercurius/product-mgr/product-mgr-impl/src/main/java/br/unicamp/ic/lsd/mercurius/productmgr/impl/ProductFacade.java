@@ -121,18 +121,18 @@ class ProductFacade implements ProductMgt {
 	public Manufacturer getManufacturerById(Integer id) {
 		return manager.getManufactoryDAO().findById(id);
 	}
-	
+
 	@Override
-	public Collection<Product> getRandomProducts(Integer quantity) {
+	public Collection<Product> getRandomProducts(HttpServletRequest request, Integer quantity) {
 		if (quantity == null || quantity < 1) {
 			return Collections.emptyList();
 		}
 		Collection<Product> products = manager.getProductDAO().getRandomProducts(quantity);
 		return products;
 	}
-
+	
 	@Override
-	public Collection<Product> getRandomProducts(HttpServletRequest request, Integer quantity) {
+	public Collection<Product> getRandomProducts(Integer quantity) {
 		if (quantity == null || quantity < 1) {
 			return Collections.emptyList();
 		}
