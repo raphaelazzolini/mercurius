@@ -49,11 +49,6 @@ class ViewProductAdapter implements ViewProductMgt {
 		categoriesList.add(category);
 		return categoriesList;
 	}
-	
-	@Override
-	public Collection<Product> getFirstPageProducts() {
-		return productMgt.getRandomProducts(4);
-	}
 
 	@Override
 	public Collection<Product> getFirstPageProducts(HttpServletRequest request) {

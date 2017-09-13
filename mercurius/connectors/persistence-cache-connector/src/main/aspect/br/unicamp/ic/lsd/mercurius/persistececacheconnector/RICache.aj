@@ -8,8 +8,8 @@ import br.unicamp.ic.lsd.mercurius.datatype.Customer;
 import br.unicamp.ic.lsd.mercurius.datatype.Product;
 import br.unicamp.ic.lsd.mercurius.datatype.ProductQuantity;
 import br.unicamp.ic.lsd.mercurius.datatype.Promotion;
+import br.unicamp.ic.lsd.mercurius.persistence.aspects.PersistenceXPI;
 import br.unicamp.ic.lsd.mercurius.persistencecacheconnector.CacheAdapter;
-import br.unicamp.ic.lsd.mercurius.persistece.aspects.PersistenceXPI;
 
 
 public aspect RICache {
