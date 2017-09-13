@@ -128,4 +128,6 @@ public interface CustomerMgt {
 	 * @return
 	 */
 	Address newAddress();
+
+	List<Customer> getCustomers();
 }

@@ -97,5 +97,21 @@
 			<scope>test</scope>
 			<optional>true</optional>
 		</dependency>
+		
+		<dependency>
+		    <groupId>javax.mail</groupId>
+		    <artifactId>mail</artifactId>
+		<version>1.4</version>
+</dependency>
+
+
+		<dependency>
+			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+			<artifactId>email-marketing-mgr-spec</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>br.unicamp.ic.lsd.mercurius</groupId>
+			<artifactId>email-marketing-mgr-impl</artifactId>
+		</dependency>
 	</dependencies>
 </project>
