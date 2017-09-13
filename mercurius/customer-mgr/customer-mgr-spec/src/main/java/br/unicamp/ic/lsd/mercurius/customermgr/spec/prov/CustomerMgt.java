@@ -2,6 +2,8 @@ package br.unicamp.ic.lsd.mercurius.customermgr.spec.prov;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import br.unicamp.ic.lsd.mercurius.datatype.Address;
 import br.unicamp.ic.lsd.mercurius.datatype.Customer;
 import br.unicamp.ic.lsd.mercurius.excpetionhandler.exceptions.DuplicatedDocumentException;
@@ -128,4 +130,13 @@ public interface CustomerMgt {
 	 * @return
 	 */
 	Address newAddress();
+
+	/**
+	 * Sends marketing email with announces to clients.
+	 * 
+	 */
+
+	void sendEmailMarketing();
+
+	void sendEmail(List<Customer> customers);
 }

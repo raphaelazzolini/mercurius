@@ -130,5 +130,14 @@ class ProductFacade implements ProductMgt {
 		Collection<Product> products = manager.getProductDAO().getRandomProducts(quantity);
 		return products;
 	}
+	
+	@Override
+	public Collection<Product> getRandomProducts(Integer quantity) {
+		if (quantity == null || quantity < 1) {
+			return Collections.emptyList();
+		}
+		Collection<Product> products = manager.getProductDAO().getRandomProducts(quantity);
+		return products;
+	}
 
 }

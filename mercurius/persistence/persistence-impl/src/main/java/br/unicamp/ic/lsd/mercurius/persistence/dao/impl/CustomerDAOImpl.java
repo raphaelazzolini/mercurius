@@ -53,6 +53,17 @@ public class CustomerDAOImpl extends AbstractDAO<Customer, Integer> implements C
 		}
 		return null;
 	}
+	
+	@Override
+	public List<? extends Customer> getCustomers() {
+		TypedQuery<? extends Customer> query = getEntityManager().createQuery(
+				"from Customer", getEntityClass());
+		List<? extends Customer> resultList = query.getResultList();
+		if (CollectionUtils.isNotEmpty(resultList)) {
+			return resultList;
+		}
+		return null;
+	}
 
 	@Override
 	public Customer loadCustomerAddresses(Customer customer) {

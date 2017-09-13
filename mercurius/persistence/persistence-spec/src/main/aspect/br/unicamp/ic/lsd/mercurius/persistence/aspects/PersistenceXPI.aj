@@ -1,4 +1,4 @@
-package br.unicamp.ic.lsd.mercurius.persistece.aspects;
+package br.unicamp.ic.lsd.mercurius.persistence.aspects;
 
 import java.util.List;
 
